@@ -1,4 +1,31 @@
 CREATE TABLE IF NOT EXISTS CATEGORIES
 (
-    id INTEGER
-)
+    cat_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cat_name TEXT NOT NULL UNIQUE CHECK (length(cat_name) <= 50)
+);
+
+CREATE TABLE IF NOT EXISTS BUDGETS
+(
+    bdgt_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bdgt_month INTEGER CHECK(bdgt_month BETWEEN 1 AND 12) NOT NULL,
+    bdgt_year INTEGER CHECK(bdgt_year BETWEEN 2000 AND 2100) NOT NULL,
+    cat_id INTEGER NOT NULL,
+    bdgt_amount INTEGER NOT NULL,
+    
+    UNIQUE (bdgt_month, bdgt_year, cat_id),
+
+    FOREIGN KEY (cat_id) REFERENCES CATEGORIES(cat_id)
+);
+
+CREATE TABLE IF NOT EXISTS EXPENDITURES
+(
+    exp_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    exp_day INTEGER CHECK(exp_day BETWEEN 1 AND 31) NOT NULL,
+    exp_month INTEGER CHECK(exp_month BETWEEN 1 AND 12) NOT NULL,
+    exp_year INTEGER CHECK(exp_year BETWEEN 2000 AND 2100) NOT NULL,
+    exp_amount INTEGER NOT NULL,
+    cat_id INTEGER NOT NULL,
+    exp_note TEXT CHECK(exp_note IS NULL OR length(exp_note) BETWEEN 1 AND 400),
+
+    FOREIGN KEY (cat_id) REFERENCES CATEGORIES(cat_id)
+);
