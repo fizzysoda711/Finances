@@ -22,7 +22,9 @@ EXPENDITURES
 - note (optional)
 
 
+
 **Query Functions**
+
 show expenditures by month, date, or year
 - gives overall total spent
 - gives total spent in each category and how much was over or under the budget
