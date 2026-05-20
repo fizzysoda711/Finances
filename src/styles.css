@@ -1,6 +1,6 @@
 body
 {
-  background-color: rgb(42, 63, 46);
+  background-color: rgb(27, 41, 30);
   margin-left: 90px;
   font-family: Arial, sans-serif;
 }
@@ -12,7 +12,7 @@ body
   width: 70px;
   height: 100vh;
   background-color: rgb(21, 23, 21);
-  border-radius: 20px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
 }
@@ -112,3 +112,33 @@ body
   font-size: 25px;
 }
 
+.budget-bar
+{
+  position: absolute;
+  left: 90px;
+  top: 100px;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.budget-icon
+{
+  transform: rotate(125deg);
+  color: rgb(21, 23, 21);
+}
+
+.budget-text
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+.budget-bar-amount
+{
+  color: rgb(161, 199, 160);
+}
