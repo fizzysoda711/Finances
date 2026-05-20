@@ -122,13 +122,20 @@ body
   align-items: center;
   justify-content: center;
 }
-
-.budget-icon
+.budget-icon-empty
 {
   transform: rotate(125deg);
   color: rgb(21, 23, 21);
 }
-
+.budget-icon-full
+{
+  color: rgb(161, 199, 160);
+  transform: rotate(125deg);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
 .budget-text
 {
   position: absolute;
