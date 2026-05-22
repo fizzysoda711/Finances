@@ -1,3 +1,4 @@
+/* Controls the whole screen */
 body
 {
   background-color: rgb(27, 41, 30);
@@ -5,6 +6,23 @@ body
   font-family: Arial, sans-serif;
 }
 
+/* page changing stuff and formatting (all pages) */
+.page
+{
+  margin-left: 30px;
+  margin-right: 60px;
+}
+.hidden
+{
+  display: none !important;
+}
+.title
+{
+  color: rgb(161, 199, 160);
+  font-size: 25px;
+}
+
+/* sidebar buttons customization */
 .sidebar {
   position: fixed;
   left: 0;
@@ -71,7 +89,6 @@ body
 {
   margin-top: auto;
 }
-
 .sidebar-line 
 {
   width: 40px;
@@ -106,35 +123,42 @@ body
   border-radius: 10px;
 }
 
-.title
-{
-  color: rgb(161, 199, 160);
-  font-size: 25px;
-}
 
-.budget-bar
+/* HOME PAGE */
+/* home page budget bar */
+.budget-bar-all
+{
+  display: flex;
+  margin-left: -35px;
+}
+.budget-bar-img 
+{
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+.budget-svg
 {
   position: absolute;
-  left: 90px;
-  top: 100px;
   transform-origin: center;
   display: flex;
-  align-items: center;
+  stroke-width: 1.5;
   justify-content: center;
+  transform: rotate(125deg);
 }
 .budget-icon-empty
 {
-  transform: rotate(125deg);
-  color: rgb(21, 23, 21);
+  fill: none;
+  stroke: rgb(21, 23, 21);
+  stroke-width: 1.5;
 }
 .budget-icon-full
 {
-  color: rgb(161, 199, 160);
-  transform: rotate(125deg);
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
+  fill: none;
+  stroke: rgb(161, 199, 160);
+  stroke-width: 1.5;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
 }
 .budget-text
 {
@@ -148,4 +172,117 @@ body
 .budget-bar-amount
 {
   color: rgb(161, 199, 160);
+}
+.budget-bar-info
+{
+  margin: auto;
+  position: flex;
+  color: white;
+}
+
+/* home page date, budget, and amt spent */
+.dash-date
+{
+  color: white;
+}
+.dash-nums
+{
+  color: rgb(161, 199, 160);
+}
+
+
+/* CATEGORY PAGE */
+/* category page new category button */
+.new-category-button
+{
+  background: none;
+  border-color: rgb(161, 199, 160);
+  color: white;
+  margin: 30px;
+  margin-left: 0px;
+  margin-top: 60px;
+  width: 180px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.make-new-category-popup
+{
+  background-color: rgb(18, 27, 20);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 60px;
+}
+.make-new-category-color-input
+{
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+.make-new-category-name,
+.make-new-category-budget,
+.make-new-category-color
+{
+  display: flex;
+  align-items: center;
+  color: rgb(161, 199, 160);
+  gap: 10px;
+}
+.make-new-category-name-input
+{
+  background-color: rgb(18, 27, 20);
+  color: white;
+  border-color: rgb(27, 41, 30);
+  border-radius: 10px;
+  padding: 10px;
+}
+.make-new-category-budget-input
+{
+  background-color: rgb(18, 27, 20);
+  color: white;
+  border-color: rgb(27, 41, 30);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: right;
+}
+.make-new-category-name-input:focus,
+.make-new-category-budget-input:focus
+{
+  outline: none;
+  border: 2px solid rgb(27, 41, 30);
+}
+
+.save-new-category-button
+{
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: green;
+  border-radius: 10px;
+  margin-right: 10px;
+
+  line-height: 0;
+}
+.save-new-category-button:hover
+{
+  background-color: rgba(255, 255, 255, 0.060);
+}
+
+.cancel-new-category-button
+{
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: red;
+  border-radius: 10px;
+
+  line-height: 0;
+}
+.cancel-new-category-button:hover
+{
+  background-color: rgba(255, 255, 255, 0.060);
 }

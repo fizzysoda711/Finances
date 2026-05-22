@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "finance-app",
+  "productName": "Spend Better",
   "version": "0.1.0",
-  "identifier": "com.anitac.finance-app",
+  "identifier": "com.anitac.Spend Better",
   "build": {
     "frontendDist": "../src"
   },
@@ -10,9 +10,12 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "finance-app",
-        "width": 800,
-        "height": 600
+        "title": "Spend Better",
+        "width": 8000,
+        "height": 10000,
+        "minWidth": 1000,
+        "minHeight": 400
+
       }
     ],
     "security": {

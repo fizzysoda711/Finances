@@ -5,11 +5,10 @@
     <link rel="stylesheet" href="styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Spend Better</title>
-    <title>Spend Better</title>
-    <script type="module" src="/main.js" defer></script>
   </head>
-  
+
   <body>
+    <!-- side bar box and buttons -->
     <aside class="sidebar">
       <button class="home-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -18,14 +17,24 @@
           </svg>
       </button>
 
-      <button class="sidebar-button">
+      <button class="sidebar-button categories-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5a1.5 1.5 0 0 1 1.2.6l.6.8a1.5 1.5 0 0 0 1.2.6z"/>
             <path d="M3 8.268a2 2 0 0 0-1 1.738V19a2 2 0 0 0 2 2h11a2 2 0 0 0 1.732-1"/>
           </svg>
       </button>
 
-      <button class="sidebar-button">
+        <button class="sidebar-button budgets-button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/>
+            <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
+            <path d="m2 16 6 6"/>
+            <circle cx="16" cy="9" r="2.9"/>
+            <circle cx="6" cy="5" r="3"/>
+          </svg>
+      </button>
+
+      <button class="sidebar-button expenditures-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/>
             <path d="m16 19 3 3 3-3"/>
@@ -33,16 +42,6 @@
             <path d="M19 16v6"/>
             <path d="M6 12h.01"/>
             <circle cx="12" cy="12" r="2"/>
-          </svg>
-      </button>
-
-      <button class="sidebar-button">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/>
-            <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
-            <path d="m2 16 6 6"/>
-            <circle cx="16" cy="9" r="2.9"/>
-            <circle cx="6" cy="5" r="3"/>
           </svg>
       </button>
       
@@ -58,38 +57,91 @@
       </section>
     </aside>
 
-    
-    <section class="home">
+    <!-- HOME PAGE -->
+    <section class="page home-page">
       <section class="title">
-        <h3>Dashboard</h3>
+        <h2>Dashboard</h2>
       </section>
 
-
-      <div class="budget-bar">
-        <div class="budget-icon-empty">
-          <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader-circle-icon lucide-loader-circle">
-            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+      <!-- budget bar icon and text + budget & spent information-->
+      <section class="budget-bar-all">
+        <div class="budget-bar-img">
+          <svg class="budget-svg" xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path pathLength="100" class="budget-icon-empty" d="M21 12a9 9 0 1 1-6.219-8.56"/>              
+            <path pathLength="100" class="budget-icon-full" d="M21 12a9 9 0 1 1-6.219-8.56"/>
           </svg>
+
+          <div class="budget-text">
+            <h1 class="budget-bar-amount">$0.00</h1>
+            <h3>Left in Budget</h3>
+          </div>
         </div>
 
-        <div class="budget-icon-full">
-          <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader-circle-icon lucide-loader-circle">
-            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
-          </svg>
+        <div class="budget-bar-info">
+          <h1 class="dash-date">January 2026 Analytics</h1>
+          <h2>Budget: <span class="dash-nums dash-budget">$1000.00</span></h2>
+          <h2>Spent: <span class="dash-nums dash-spent">$250.00</span></h2>
         </div>
+      </section>
+    </section>
+    
+    <!-- CATEGORIES PAGE -->
+    <section class="page categories-page hidden">
+      <div class="title">
+        <h2>Categories</h2>
+      </div>
 
-        <div class="budget-text">
-            <h2 class="budget-bar-amount">$478.36</h2>
-            <p>Left in Budget</p>
+      <!-- new category button -->
+      <button class="new-category-button">
+        <h2>+ New Category</h2>
+      </button>
+
+      <!-- make a new category popup -->
+      <div class="hidden make-new-category-popup">
+        <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="50"></p>
+        <p class="make-new-category-budget">Budget: <input class="make-new-category-budget-input" type="text" inputmode="numeric" placeholder="Enter your budget"></p>
+        <p class="make-new-category-budget">Color: <input class="make-new-category-color-input" type="color"></p>
+        <div>
+          <button class="save-new-category-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6 9 17l-5-5"/>
+            </svg>
+          </button>
+          <button class="cancel-new-category-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+          </button>
         </div>
       </div>
-        
-          
-        </div>
-      </section>
 
-      
+      <!-- categories list (made dynamically) -->
+      <span class="categories-list-item"></span>
     </section>
 
+    <!-- BUDGETS & SAVINGS PAGE -->
+    <section class="page budgets-page hidden">
+      <div class="title">
+        <h2>Budgets & Savings</h2>
+      </div>
+    </section>
+
+    <!-- EXPENDITURES PAGE -->
+    <section class="page expenditures-page hidden">
+      <div class="title">
+        <h2>Expenditures</h2>
+      </div>
+    </section>
+
+    <!-- SETTINGS PAGE -->
+    <section class="page settings-page hidden">
+      <div class="title">
+        <h2>Settings</h2>
+      </div>
+    </section>
+
+    <!-- connection to the javascript file -->
+    <script type="module" src="./main.js"></script>
+    
   </body>
 </html>
