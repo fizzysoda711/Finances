@@ -1,4 +1,7 @@
-// imports
+// import invoke (to call rust functions from js)
+const invoke = window.__TAURI__.core.invoke;
+
+// imports from other js files
 import 
 { 
     showLoadingScreen, 
@@ -57,7 +60,7 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
     }
 
     // get the date
-    let currentDate = updateDate();
+    let currentDate = getDate();
 
     // make budget into a number (and remove decimals)
     catBudget = Math.round(Number(catBudget) * 100);
@@ -108,7 +111,7 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
 });
 
 // load categories
-async function loadCategories()
+export async function loadCategories()
 {
     const categories = await invoke("get_categories_and_budgets");
 
