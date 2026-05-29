@@ -1,146 +1,15 @@
-// import invoke (to call rust functions from js)
-const invoke = window.__TAURI__.core.invoke;
+// imports
+import 
+{ 
+    showLoadingScreen, 
+    hideLoadingScreen, 
+    getDate
+} 
+from "./helpers.js";
 
-// is it running?
-console.log("main.js is running");
-
-
-//CHANGING PAGES
-//home page
-document.querySelector(".home-button").addEventListener("click", function () 
-{
-    document.querySelectorAll(".page").forEach(function (page) 
-    {
-        page.classList.add("hidden");
-    });
-    document.querySelector(".home-page").classList.remove("hidden");
-});
-
-//categories page
-document.querySelector(".categories-button").addEventListener("click", function () 
-{
-    document.querySelectorAll(".page").forEach(function (page) 
-    {
-        page.classList.add("hidden");
-    });
-    document.querySelector(".categories-page").classList.remove("hidden");
-});
-
-//budgets page
-document.querySelector(".savings-button").addEventListener("click", function () 
-{
-    document.querySelectorAll(".page").forEach(function (page) 
-    {
-        page.classList.add("hidden");
-    });
-    document.querySelector(".savings-page").classList.remove("hidden");
-});
-
-//expenditures page
-document.querySelector(".expenditures-button").addEventListener("click", function () 
-{
-    document.querySelectorAll(".page").forEach(function (page) 
-    {
-        page.classList.add("hidden");
-    });
-    document.querySelector(".expenditures-page").classList.remove("hidden");
-});
-
-//settings page
-document.querySelector(".settings-button").addEventListener("click", function () 
-{
-    document.querySelectorAll(".page").forEach(function (page) 
-    {
-        page.classList.add("hidden");
-    });
-    document.querySelector(".settings-page").classList.remove("hidden");
-});
-
-// show loading screen helper function
-function showLoadingScreen(message = "Loading")
-{
-    document.querySelector(".loading-message").textContent = message + "...";
-    document.querySelector(".loading-overlay").classList.remove("hidden");
-}
-
-// hide loading screen helper function
-function hideLoadingScreen()
-{
-    document.querySelector(".loading-overlay").classList.add("hidden");
-}
+// CATEGORIES PAGE FUNCTIONS
 
 
-// HOME PAGE ELEMENTS
-// Budget bar fill
-let budget = 1500;
-let spent = 500;
-let left = budget - spent;
-let offset;
-
-// if left is negative the bar is 100% full
-if (left < 0)
-{
-    offset = 0;
-    document.querySelector(".budget-bar-amount").textContent = "- $" + Math.abs(left).toFixed(2);
-}
-else
-{
-    let percentUsed = spent / budget;
-    offset = 100 - percentUsed * 100;
-    document.querySelector(".budget-bar-amount").textContent = "$" + left.toFixed(2);
-}
-document.querySelector(".budget-icon-full").style.strokeDashoffset = offset;
-
-// showing budget and amount spent on dashboard
-document.querySelector(".dash-budget").textContent = "  $" + budget.toFixed(2);
-document.querySelector(".dash-spent").textContent = "  $" + spent.toFixed(2);
-
-// add colors changing slowly to red as bar fills (to do)
-
-// function to update the date based on system date
-function updateDate()
-{
-    let now = new Date();
-    
-    let year = now.getFullYear();
-    let month = now.getMonth();
-    let day = now.getDate();
-
-    // number month to letter month
-    const months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    ];
-
-    let monthName = months[month];
-
-    month = month + 1; // bc jan is 0. want it to be 1
-
-    // change the dashboard month and year to match current
-    document.querySelector(".dash-date").textContent = monthName + " " + year + " Analytics";
-
-    return {
-        Y: year,
-        M: month,
-        D: day
-    };
-}
-
-updateDate();
-setInterval(updateDate, 1000); // run update date every second (1000 ms)
-
-
-// CATEGORIES PAGE
 // pressing add category button
 document.querySelector(".new-category-button").addEventListener("click", function () 
 {
@@ -289,9 +158,3 @@ async function loadCategories()
         
     });
 }
-
-
-// run on load
-window.addEventListener("DOMContentLoaded", () => {
-    loadCategories();
-});

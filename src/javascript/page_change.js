@@ -1,0 +1,29 @@
+function showPage(pageClass) {
+  document.querySelectorAll(".page").forEach(function (page) {
+    page.classList.add("hidden");
+  });
+
+  document.querySelector(pageClass).classList.remove("hidden");
+}
+
+export function setupPageChangeButtons() {
+  document.querySelector(".home-button").addEventListener("click", function () {
+    showPage(".home-page");
+  });
+
+  document.querySelector(".categories-button").addEventListener("click", function () {
+    showPage(".categories-page");
+  });
+
+  document.querySelector(".savings-button").addEventListener("click", function () {
+    showPage(".savings-page");
+  });
+
+  document.querySelector(".expenditures-button").addEventListener("click", function () {
+    showPage(".expenditures-page");
+  });
+
+  document.querySelector(".settings-button").addEventListener("click", function () {
+    showPage(".settings-page");
+  });
+}
