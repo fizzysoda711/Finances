@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS CATEGORIES
 (
     cat_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cat_name TEXT NOT NULL UNIQUE CHECK (length(cat_name) <= 50)
+    cat_name TEXT NOT NULL UNIQUE CHECK (length(cat_name) <= 50),
+    cat_color TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS BUDGETS

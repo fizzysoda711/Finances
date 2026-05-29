@@ -1,7 +1,17 @@
+/* color variables for simplicity */
+:root
+{
+  --color-background: rgb(27, 41, 30);
+  --color-accent-light: rgb(161, 199, 160);
+  --color-accent-dark: rgb(18, 27, 20);
+  --color-aside: rgb(21, 23, 21);
+  --color-text: lightgray;
+}
+
 /* Controls the whole screen */
 body
 {
-  background-color: rgb(27, 41, 30);
+  background-color: var(--color-background);
   margin-left: 90px;
   font-family: Arial, sans-serif;
 }
@@ -18,71 +28,64 @@ body
 }
 .title
 {
-  color: rgb(161, 199, 160);
+  color: var(--color-accent-light);
   font-size: 25px;
 }
 
-/* sidebar buttons customization */
+/* sidebar and sidebar buttons customization */
 .sidebar {
   position: fixed;
   left: 0;
   top: 0;
   width: 70px;
   height: 100vh;
-  background-color: rgb(21, 23, 21);
+  background-color: var(--color-aside);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
 }
 
-.home-button
+.sidebar-icon-button
 {
   background: none;
   border: none;
-  color: rgb(161, 199, 160);
-  margin: 10.5px;
-  margin-top: 22px;
-  margin-bottom: 12px;
+  color: var(--color-accent-light);
+
   width: 48px;
   height: 48px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.home-button:hover
+.sidebar-icon-button:hover
 {
   background-color: rgb(32, 32, 32);
   border-radius: 10px;
 }
-.home-button:active
+.sidebar-icon-button:active
 {
   background-color: rgb(42, 63, 46);
   border-radius: 10px;
 }
 
+.home-button
+{
+  margin: 10.5px;
+  margin-top: 22px;
+  margin-bottom: 12px;
+}
 .sidebar-button
 {
-  background: none;
-  border: none;
-  color: rgb(161, 199, 160);
   margin: 10.5px;
   margin-top: 12px;
   margin-bottom: 12px;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.sidebar-button:hover
+.settings-button
 {
-  background-color: rgb(32, 32, 32);
-  border-radius: 10px;
-}
-.sidebar-button:active
-{
-  background-color: rgb(42, 63, 46);
-  border-radius: 10px;
+  margin: 10.5px;
+  margin-top: auto;
+  margin-bottom: 22px;
 }
 
 .sidebar-bottom
@@ -93,34 +96,53 @@ body
 {
   width: 40px;
   height: 3px;
-  background-color: rgb(42, 63, 46);
+  background-color: var(--color-background);
   margin: 12px auto;
 }
 
-.settings-button
+/* Loading Screen */
+.loading-overlay 
 {
-  background: none;
-  border: none;
-  color: rgb(161, 199, 160);
-  margin: 10.5px;
-  margin-top: 12px;
-  margin-bottom: 22px;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: auto;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.settings-button:hover
-{
-  background-color: rgb(32, 32, 32);
-  border-radius: 10px;
+.loading-box {
+    background-color: rgb(2, 2, 2);
+    padding: 18px 24px;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.settings-button:active
+.loading-spinner 
 {
-  background-color: rgb(42, 63, 46);
-  border-radius: 10px;
+    width: 32px;
+    height: 32px;
+    border: 4px solid var(--color-accent-light);
+    border-top: 4px solid rgb(27, 41, 30);
+    border-radius: 50%;
+    margin: 15px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin 
+{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.loading-message
+{
+  color: var(--color-accent-light);
 }
 
 
@@ -149,13 +171,13 @@ body
 .budget-icon-empty
 {
   fill: none;
-  stroke: rgb(21, 23, 21);
+  stroke: var(--color-aside);
   stroke-width: 1.5;
 }
 .budget-icon-full
 {
   fill: none;
-  stroke: rgb(161, 199, 160);
+  stroke: var(--color-accent-light);
   stroke-width: 1.5;
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
@@ -167,27 +189,27 @@ body
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: rgb(255, 255, 255);
+  color: var(--color-text);
 }
 .budget-bar-amount
 {
-  color: rgb(161, 199, 160);
+  color: var(--color-accent-light);
 }
 .budget-bar-info
 {
   margin: auto;
   position: flex;
-  color: white;
+  color: var(--color-text);
 }
 
 /* home page date, budget, and amt spent */
 .dash-date
 {
-  color: white;
+  color: var(--color-text);
 }
 .dash-nums
 {
-  color: rgb(161, 199, 160);
+  color: var(--color-accent-light);
 }
 
 
@@ -196,11 +218,12 @@ body
 .new-category-button
 {
   background: none;
-  border-color: rgb(161, 199, 160);
-  color: white;
+  border-color: var(--color-accent-light);
+  color: var(--color-text);
   margin: 30px;
   margin-left: 0px;
   margin-top: 60px;
+  margin-bottom: 60px;
   width: 180px;
   height: 50px;
   display: flex;
@@ -208,9 +231,14 @@ body
   justify-content: center;
   border-radius: 10px;
 }
+
 .make-new-category-popup
 {
-  background-color: rgb(18, 27, 20);
+  margin-bottom: 60px;
+}
+.new-category-inputs
+{
+  background-color: var(--color-accent-dark);
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -231,22 +259,22 @@ body
 {
   display: flex;
   align-items: center;
-  color: rgb(161, 199, 160);
+  color: var(--color-accent-light);
   gap: 10px;
 }
 .make-new-category-name-input
 {
-  background-color: rgb(18, 27, 20);
-  color: white;
-  border-color: rgb(27, 41, 30);
+  background-color: var(--color-accent-dark);
+  color: var(--color-text);
+  border-color: var(--color-background);
   border-radius: 10px;
   padding: 10px;
 }
 .make-new-category-budget-input
 {
-  background-color: rgb(18, 27, 20);
-  color: white;
-  border-color: rgb(27, 41, 30);
+  background-color: var(--color-accent-dark);
+  color: var(--color-text);
+  border-color: var(--color-background);
   border-radius: 10px;
   padding: 10px;
   text-align: right;
@@ -285,4 +313,88 @@ body
 .cancel-new-category-button:hover
 {
   background-color: rgba(255, 255, 255, 0.060);
+}
+
+.make-new-category-error-message
+{
+  color: red
+}
+
+.categories-list
+{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.category-box 
+{
+  width: 30%;
+  height: 150px;
+  box-sizing: border-box;
+  min-width: 300px;
+  margin-bottom: 50px;
+
+  display: flex;
+  flex-direction: row;
+  
+  background-color: rgb(18, 27, 20);
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.category-box-color 
+{
+  width: 40px;
+  height: 100%;
+  margin-right: 30px;
+}
+.category-box-content 
+{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+}
+.category-box-name-and-edit
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.category-box-name 
+{
+  font-weight: bold;
+  color: lightgray;
+  font-size: 24px;
+}
+.category-box-edit-button
+{
+  align-items: right;
+  margin-right: 30px;
+
+  width: 40px;
+  height: 40px;
+
+  background: none;
+  border: none;
+  color: lightgray;
+}
+.category-box-edit-button:active
+{
+  background-color: rgb(42, 63, 46);
+  border-radius: 10px;
+}
+.category-box-budget {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 20px;
+  color: var(--color-accent-light);
+}
+.category-box-budget-label
+{
+  font-weight: bold;
 }

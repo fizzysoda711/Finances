@@ -10,21 +10,21 @@
   <body>
     <!-- side bar box and buttons -->
     <aside class="sidebar">
-      <button class="home-button">
+      <button class="home-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/>
             <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
           </svg>
       </button>
 
-      <button class="sidebar-button categories-button">
+      <button class="categories-button sidebar-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5a1.5 1.5 0 0 1 1.2.6l.6.8a1.5 1.5 0 0 0 1.2.6z"/>
             <path d="M3 8.268a2 2 0 0 0-1 1.738V19a2 2 0 0 0 2 2h11a2 2 0 0 0 1.732-1"/>
           </svg>
       </button>
 
-        <button class="sidebar-button budgets-button">
+      <button class="savings-button sidebar-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/>
             <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/>
@@ -34,7 +34,7 @@
           </svg>
       </button>
 
-      <button class="sidebar-button expenditures-button">
+      <button class="expenditures-button sidebar-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/>
             <path d="m16 19 3 3 3-3"/>
@@ -48,7 +48,7 @@
       <section class="sidebar-bottom">
         <div class="sidebar-line"></div>
 
-        <button class="settings-button">
+        <button class="settings-button sidebar-icon-button">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/>
               <circle cx="12" cy="12" r="3"/>
@@ -56,6 +56,14 @@
         </button>
       </section>
     </aside>
+
+    <!-- loading screen -->
+    <div class="loading-overlay hidden">
+        <div class="loading-box">
+          <div class="loading-spinner"></div>
+          <p class="loading-message">Saving</p>
+        </div>
+    </div>
 
     <!-- HOME PAGE -->
     <section class="page home-page">
@@ -88,7 +96,7 @@
     <!-- CATEGORIES PAGE -->
     <section class="page categories-page hidden">
       <div class="title">
-        <h2>Categories</h2>
+        <h2>Categories & Budgets</h2>
       </div>
 
       <!-- new category button -->
@@ -98,31 +106,36 @@
 
       <!-- make a new category popup -->
       <div class="hidden make-new-category-popup">
-        <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="50"></p>
-        <p class="make-new-category-budget">Budget: <input class="make-new-category-budget-input" type="text" inputmode="numeric" placeholder="Enter your budget"></p>
-        <p class="make-new-category-budget">Color: <input class="make-new-category-color-input" type="color"></p>
-        <div>
-          <button class="save-new-category-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 6 9 17l-5-5"/>
-            </svg>
-          </button>
-          <button class="cancel-new-category-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-            </svg>
-          </button>
+        <div class="new-category-inputs">
+          <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="50"></p>
+          <p class="make-new-category-budget">Budget: <input class="make-new-category-budget-input" type="text" inputmode="numeric" placeholder="Enter your budget"></p>
+          <p class="make-new-category-budget">Color: <input class="make-new-category-color-input" type="color"></p>
+          <div>
+            <button class="save-new-category-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5"/>
+              </svg>
+            </button>
+            <button class="cancel-new-category-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+              </svg>
+            </button>
+          </div>
         </div>
+        <p class="make-new-category-error-message hidden">Could not create new category.</p>
       </div>
 
       <!-- categories list (made dynamically) -->
-      <span class="categories-list-item"></span>
+      <div class="categories-list">
+        
+      </div>
     </section>
 
-    <!-- BUDGETS & SAVINGS PAGE -->
-    <section class="page budgets-page hidden">
+    <!-- SAVINGS PAGE -->
+    <section class="page savings-page hidden">
       <div class="title">
-        <h2>Budgets & Savings</h2>
+        <h2>Savings</h2>
       </div>
     </section>
 

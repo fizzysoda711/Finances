@@ -13,9 +13,8 @@
         "title": "Spend Better",
         "width": 8000,
         "height": 10000,
-        "minWidth": 1000,
+        "minWidth": 850,
         "minHeight": 400
-
       }
     ],
     "security": {
