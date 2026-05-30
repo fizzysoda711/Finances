@@ -1,0 +1,103 @@
+
+/* Controls the whole screen */
+body
+{
+    background-color: var(--color-background);
+    margin-left: 90px;
+    font-family: Arial, sans-serif;
+}
+
+/* Loading Screen */
+.loading-overlay 
+{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading-box {
+    background-color: rgb(2, 2, 2);
+    padding: 18px 24px;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loading-spinner 
+{
+    width: 32px;
+    height: 32px;
+    border: 4px solid var(--color-accent-light);
+    border-top: 4px solid rgb(27, 41, 30);
+    border-radius: 50%;
+    margin: 15px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin 
+{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.loading-message
+{
+    color: var(--color-accent-light);
+}
+
+
+/* General Classes */
+.page
+{
+    margin-left: 30px;
+    margin-right: 60px;
+}
+
+.hidden
+{
+    display: none !important;
+}
+
+.title
+{
+    color: var(--color-accent-light);
+    font-size: 25px;
+}
+
+.full-center
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vertical-center
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.horizontal-center
+{
+    display: flex;
+    justify-content: center;
+}
+
+.column
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.row
+{
+    display: flex;
+    flex-direction: row;
+}

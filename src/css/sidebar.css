@@ -1,0 +1,71 @@
+
+/* sidebar general */
+#sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+    width: 70px;
+    height: 100vh;
+    border-radius: 15px;
+
+    background-color: var(--color-aside);
+}
+
+/* general sidebar buttons */
+.sidebar-icon-button
+{
+    background: none;
+    border: none;
+    color: var(--color-accent-light);
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar-icon-button:hover
+{
+    background-color: rgb(32, 32, 32);
+    border-radius: 10px;
+}
+.sidebar-icon-button:active
+{
+    background-color: rgb(42, 63, 46);
+    border-radius: 10px;
+}
+
+/* specific sidebar buttons */
+.home-button
+{
+    margin: 10.5px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+}
+.sidebar-button
+{
+    margin: 10.5px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.settings-button
+{
+    margin: 10.5px;
+    margin-top: auto;
+    margin-bottom: 22px;
+}
+
+/* sidebar bottom and line */
+.sidebar-bottom
+{
+    margin-top: auto;
+}
+.sidebar-line 
+{
+  width: 40px;
+  height: 3px;
+  background-color: var(--color-background);
+  margin: 12px auto;
+}

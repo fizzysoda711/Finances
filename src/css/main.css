@@ -1,0 +1,6 @@
+/* imports (other css files */
+@import url("./variables.css");
+@import url("./general.css");
+@import url("./sidebar.css");
+@import url("./dashboard_page.css");
+@import url("./categories_page.css");

@@ -1,0 +1,11 @@
+/* color variables for simplicity */
+:root
+{
+    --color-background: rgb(27, 41, 30);
+    --color-accent-light: rgb(161, 199, 160);
+    --color-accent-dark: rgb(18, 27, 20);
+    --color-aside: rgb(21, 23, 21);
+    --color-text: lightgray;
+    --color-white: white;
+    --color-black: rgb(15, 15, 15);
+}

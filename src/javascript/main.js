@@ -13,12 +13,6 @@ import { loadCategories } from "./categories_page.js"
 console.log("main.js is running");
 
 
-// update the dashboard every minte (60,000 ms)
-updateDash();
-setInterval(updateDash, 60000);
-
-
-
 // run on start of the app
 window.addEventListener("DOMContentLoaded", () => {
     setupPageChangeButtons(); // setup clicker event for changing pages buttons

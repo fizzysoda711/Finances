@@ -10,7 +10,23 @@ import
 } 
 from "./helpers.js";
 
-// CATEGORIES PAGE FUNCTIONS
+// CATEGORIES PAGE-SPECIFIC HELPERS
+
+// clear and close new category creating input fields
+function closeNewCategoryPopup() {
+    document.querySelector(".make-new-category-popup").classList.add("hidden");
+    document.querySelector(".make-new-category-error-message").classList.add("hidden");
+    document.querySelector(".new-category-button").classList.remove("hidden");
+
+    document.querySelector(".make-new-category-name-input").value = "";
+    document.querySelector(".make-new-category-budget-input").value = "";
+    document.querySelector(".make-new-category-color-input").value = "#000000";
+
+    document.querySelector(".make-new-category-error-message").classList.add("hidden");
+}
+
+
+
 
 
 // pressing add category button
@@ -30,18 +46,13 @@ budgetInput.addEventListener("input", function () {
     budgetInput.value = (cents / 100).toFixed(2);
 });
 
+
 // pressing the cancel button on the making a new category popup
 document.querySelector(".cancel-new-category-button").addEventListener("click", function () 
 {
-    document.querySelector(".make-new-category-popup").classList.add("hidden");
-    document.querySelector(".make-new-category-error-message").classList.add("hidden");
-    document.querySelector(".new-category-button").classList.remove("hidden");
-
-    // clear input fields
-    document.querySelector(".make-new-category-name-input").value = "";
-    document.querySelector(".make-new-category-budget-input").value = "";
-    document.querySelector(".make-new-category-color-input").value = "#000000";
+    closeNewCategoryPopup();
 });
+
 
 // pressing the save button after making a new category
 document.querySelector(".save-new-category-button").addEventListener("click", async function () 
@@ -81,21 +92,11 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
 
     try
     {
-        // sent newCategory to add_category function in rust as category
+        // send newCategory to add_category function in rust as category
         await invoke("add_category_and_budget", { category: newCategory});
 
-        // close the new category input box
-        document.querySelector(".make-new-category-popup").classList.add("hidden");
-        document.querySelector(".make-new-category-error-message").classList.add("hidden");
-        document.querySelector(".new-category-button").classList.remove("hidden");
-
-        // clear input fields
-        document.querySelector(".make-new-category-name-input").value = "";
-        document.querySelector(".make-new-category-budget-input").value = "";
-        document.querySelector(".make-new-category-color-input").value = "#000000";
-
-        // hide error message if present
-        document.querySelector(".make-new-category-error-message").classList.add("hidden");
+        // clear and close new category popup box
+        closeNewCategoryPopup();
     }
     catch (error)
     {
@@ -130,13 +131,21 @@ export async function loadCategories()
                 <div class="category-box-name-and-edit">
                     <p class="category-box-name">${category.name}</p>
                     <div>
-                        <button class="category-box-edit-button">
+                        <button class="category-box-options-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="1"/>
                                 <circle cx="19" cy="12" r="1"/>
                                 <circle cx="5" cy="12" r="1"/>
                             </svg>
                         </button>
+
+                        <div class="category-box-options-menu column hidden">
+                            <button class="category-box-options-menu-button category-box-edit-button">Edit</button>
+                            <div class="category-box-options-menu-line horizontal-center"></div>
+                            <button class="category-box-options-menu-button category-box-archive-button">Archive</button>
+                            <div class="category-box-options-menu-line horizontal-center"></div>
+                            <button class="category-box-options-menu-button category-box-delete-button">Delete</button>
+                        </div>
                     </div>
                 </div>
                 <div class="category-box-budget">
@@ -150,11 +159,24 @@ export async function loadCategories()
         `
         ;
 
-        const editButton = box.querySelector(".category-box-edit-button");
-        const optionsMenu = box.querySelector(".category-options-menu");
+        const editButton = box.querySelector(".category-box-options-button");
+        const optionsMenu = box.querySelector(".category-box-options-menu");
 
+        // opens the options menu for the category
         editButton.addEventListener("click", () => {
-            optionsMenu.classList.toggle("show");
+            event.stopPropagation();
+
+            document.querySelectorAll(".category-box-options-menu").forEach(function (menu) {
+                menu.classList.add("hidden");
+            });
+            
+            optionsMenu.classList.remove("hidden");
+
+        // closes the options menu for the category when anything is clicked on the screen
+        document.addEventListener("click", function () {
+            optionsMenu.classList.add("hidden");
+            editButton.classList.remove("hidden");
+        });
     });
 
     container.appendChild(box);
