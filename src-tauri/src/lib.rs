@@ -21,7 +21,8 @@ pub fn run()
         [
             add_category_and_budget,
             add_category_without_budget,
-            get_categories_and_budgets
+            get_categories_and_budgets,
+            change_category_and_budget
 
         ])
         .run(tauri::generate_context!())
@@ -72,6 +73,7 @@ struct CategoryWithBudget {
     budget: Option<i64>,
     month: Option<i32>,
     year: Option<i32>,
+    c_id: Option<i64>
 }
 
 
@@ -151,7 +153,8 @@ fn get_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithB
             CATEGORIES.cat_color,
             BUDGETS.bdgt_amount,
             BUDGETS.bdgt_month,
-            BUDGETS.bdgt_year
+            BUDGETS.bdgt_year,
+            CATEGORIES.cat_id
         FROM CATEGORIES
         LEFT JOIN BUDGETS ON CATEGORIES.cat_id = BUDGETS.cat_id"
     )
@@ -166,6 +169,7 @@ fn get_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithB
             budget: row.get(2)?,
             month: row.get(3)?,
             year: row.get(4)?,
+            c_id: row.get(5)?
         })
     })
     .map_err(|error| error.to_string())?;
@@ -182,5 +186,49 @@ fn get_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithB
     Ok(categories)
 }
 
+// edit category with budget
+#[tauri::command]
+fn change_category_and_budget(app: tauri::AppHandle, category: CategoryWithBudget) -> Result<(), String>
+{
+    // connect to the database
+    let mut conn = get_connection(&app)?;
 
+    // start a transaction so data isn't half saved
+    let tx = conn.transaction()
+        .map_err(|error| error.to_string())?;
 
+    // guards for optional fields bc rust requires it
+    let budget = category.budget.ok_or("Missing budget")?;
+    let month = category.month.ok_or("Missing month")?;
+    let year = category.year.ok_or("Missing year")?;
+    let catid = category.c_id.ok_or("Missing category id")?;
+
+    // change the values in CATEGORIES
+    tx.execute
+    (
+        "UPDATE CATEGORIES
+         SET cat_name = ?1,
+             cat_color = ?2
+         WHERE cat_id = ?3",
+        params![category.name, category.color, category.c_id],
+    )
+    .map_err(|error| error.to_string())?;
+
+    // change the values in BUDGETS
+    tx.execute
+    (
+        "UPDATE BUDGETS
+        SET bdgt_amount = ?1
+        WHERE cat_id = ?2
+        AND bdgt_month = ?3
+        AND bdgt_year = ?4",
+        params![budget, catid, month, year],
+    )
+    .map_err(|error| error.to_string())?;
+
+    // finish the transaction
+    tx.commit()
+        .map_err(|error| error.to_string())?;
+
+    Ok(())
+}

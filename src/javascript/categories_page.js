@@ -25,6 +25,41 @@ function closeNewCategoryPopup() {
     document.querySelector(".make-new-category-error-message").classList.add("hidden");
 }
 
+// clear and close all category options menu stuff
+function closeCategoriesOptionsMenu(box)
+{
+    // menu variables
+    const optionsMenuButton = box.querySelector(".category-box-options-button");
+    const optionsMenu = box.querySelector(".category-box-options-menu");
+
+    // edit category variables
+    const optionsMenuEditButton = box.querySelector(".category-box-edit-button");
+    const optionsMenuEdit = box.querySelector(".category-box-options-menu-edit");
+
+    const editMenuNameInput = box.querySelector(".edit-category-name-input");
+    const editMenuBudgetInput = box.querySelector(".edit-category-budget-input");
+    const editMenuColorInput = box.querySelector(".edit-category-color-input");
+
+    // archive category variables
+    const optionsMenuArchiveButton = box.querySelector(".category-box-archive-button");
+    const optionsMenuArchive = box.querySelector(".category-box-options-menu-archive");
+
+    // delete category variables
+    const optionsMenuDeleteButton = box.querySelector(".category-box-delete-button");
+    const optionsMenuDelete = box.querySelector(".category-box-options-menu-delete");
+    
+    // hide all the menu stuff
+    optionsMenu.classList.add("hidden");
+    optionsMenuEdit.classList.add("hidden");
+    optionsMenuArchive.classList.add("hidden");
+    optionsMenuDelete.classList.add("hidden");
+    optionsMenuButton.classList.remove("hidden");
+
+    // reset edit menu values to default
+    editMenuNameInput.value = editMenuNameInput.defaultValue;
+    editMenuBudgetInput.value = editMenuBudgetInput.defaultValue;
+    editMenuColorInput.value = editMenuColorInput.defaultValue;
+}
 
 
 
@@ -139,12 +174,27 @@ export async function loadCategories()
                             </svg>
                         </button>
 
-                        <div class="category-box-options-menu column hidden">
-                            <button class="category-box-options-menu-button category-box-edit-button">Edit</button>
-                            <div class="category-box-options-menu-line horizontal-center"></div>
-                            <button class="category-box-options-menu-button category-box-archive-button">Archive</button>
-                            <div class="category-box-options-menu-line horizontal-center"></div>
-                            <button class="category-box-options-menu-button category-box-delete-button">Delete</button>
+                        <div class="category-box-options">
+                            <div class="category-box-options-menu column hidden">
+                                <button class="category-box-options-menu-button category-box-edit-button">Edit</button>
+                                <div class="category-box-options-menu-line horizontal-center"></div>
+                                <button class="category-box-options-menu-button category-box-archive-button">Archive</button>
+                                <div class="category-box-options-menu-line horizontal-center"></div>
+                                <button class="category-box-options-menu-button category-box-delete-button">Delete</button>
+                            </div>
+
+                            <div class="category-box-options-menu-edit hidden">
+                                <p class="category-box-options-menu-edit-text">Name: <input class="edit-category-name-input" type="text" value="${category.name}" maxLength="50"></p>
+                                <p class="category-box-options-menu-edit-text">Budget: <input class="edit-category-budget-input" type="text" inputmode="numeric" value="${(category.budget / 100).toFixed(2)}"></p>
+                                <p class="category-box-options-menu-edit-text">Color: <input class="edit-category-color-input" type="color" value="${category.color}"></p>
+                                <button class="category-box-options-menu-edit-save horizontal-center">Save</button>
+                            </div>
+
+                            <div class="category-box-options-menu-archive hidden">
+                            </div>
+
+                            <div class="category-box-options-menu-delete hidden">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,27 +209,90 @@ export async function loadCategories()
         `
         ;
 
-        const editButton = box.querySelector(".category-box-options-button");
+        // general menu variables
+        const optionsMenuButton = box.querySelector(".category-box-options-button");
         const optionsMenu = box.querySelector(".category-box-options-menu");
 
-        // opens the options menu for the category
-        editButton.addEventListener("click", () => {
+        // edit category variables
+        const optionsMenuEditButton = box.querySelector(".category-box-edit-button");
+        const optionsMenuEdit = box.querySelector(".category-box-options-menu-edit");
+
+        const editMenuNameInput = box.querySelector(".edit-category-name-input");
+        const editMenuBudgetInput = box.querySelector(".edit-category-budget-input");
+        const editMenuColorInput = box.querySelector(".edit-category-color-input");
+        const editMenuSaveButton = box.querySelector(".category-box-options-menu-edit-save");
+
+        // archive category variables
+        const optionsMenuArchiveButton = box.querySelector(".category-box-archive-button");
+        const optionsMenuArchive = box.querySelector(".category-box-options-menu-archive");
+
+        // delete category variables
+        const optionsMenuDeleteButton = box.querySelector(".category-box-delete-button");
+        const optionsMenuDelete = box.querySelector(".category-box-options-menu-delete");
+
+        // functions for menu buttons
+
+        // opens the options menu
+        optionsMenuButton.addEventListener("click", () => {
             event.stopPropagation();
 
             document.querySelectorAll(".category-box-options-menu").forEach(function (menu) {
                 menu.classList.add("hidden");
             });
-            
+
             optionsMenu.classList.remove("hidden");
+        });
+
+        // opens the edit menu
+        optionsMenuEditButton.addEventListener("click", () => {
+            event.stopPropagation();
+
+            optionsMenu.classList.add("hidden");
+            optionsMenuEdit.classList.remove("hidden");
+        });
+
+        // don't close popup when clicking input fields
+        editMenuNameInput.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+        editMenuBudgetInput.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+        editMenuColorInput.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+
+        // when clicking save
+        editMenuSaveButton.addEventListener("click", async function (event) {
+            
+            const editedCategory = {
+                c_id: category.c_id,
+                name: editMenuNameInput.value,
+                budget: editMenuBudgetInput.value * 100,
+                color: editMenuColorInput.value,
+                month: getDate().M,
+                year: getDate().Y
+            };
+
+            await invoke("change_category_and_budget", { category: editedCategory });
+            await loadCategories();
+        });
+
+        // budget inputs should only allow two decimal places and no letters
+        editMenuBudgetInput.addEventListener("input", function () {
+            let digits = editMenuBudgetInput.value.replace(/\D/g, "");
+
+            let cents = Number(digits);
+
+            editMenuBudgetInput.value = (cents / 100).toFixed(2);
+        });
 
         // closes the options menu for the category when anything is clicked on the screen
         document.addEventListener("click", function () {
-            optionsMenu.classList.add("hidden");
-            editButton.classList.remove("hidden");
+            closeCategoriesOptionsMenu(box);
         });
-    });
 
-    container.appendChild(box);
-        
+        container.appendChild(box);
     });
 }
+
