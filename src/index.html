@@ -100,7 +100,7 @@
       </div>
 
       <!-- new category button -->
-      <button class="new-category-button">
+      <button class="new-category-button button full-center">
         <h2>+ New Category</h2>
       </button>
 
@@ -131,7 +131,7 @@
 
       <!-- archived categories list (made dynamically) -->
       <div class="archived-categories-dropdown">
-        <button class="archived-categories-dropdown-button row vertical-center">
+        <button class="archived-categories-dropdown-button button row vertical-center">
           <p class="archived-categories-dropdown-button-text">View Archived Categories</p>
           <svg xmlns="http://www.w3.org/2000/svg" class="archived-categories-dropdown-button-icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <path d="m9 18 6-6-6-6"/>
@@ -157,6 +157,17 @@
       <div class="title">
         <h2>Expenditures</h2>
       </div>
+
+      <button class="new-expenditure-button button full-center">
+        <h2>+ New Expenditure</h2>
+      </button>
+
+      <div class="new-expenditure-inputs row hidden">
+        <select class="expenditure-input-categories-dropdown">
+          <option class="expenditure-input-categories-dropdown-options" value="">Choose a category</option>
+        </select>
+      </div>
+
     </section>
 
     <!-- SETTINGS PAGE -->

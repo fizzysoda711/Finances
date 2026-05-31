@@ -70,6 +70,16 @@ body
     font-size: 25px;
 }
 
+.button
+{
+    background-color: transparent;
+    border-color: var(--color-accent-light);
+
+    color: var(--color-text);
+
+    border-radius: 10px;
+}
+
 .full-center
 {
     display: flex;

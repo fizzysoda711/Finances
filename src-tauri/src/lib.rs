@@ -35,6 +35,10 @@ pub fn run()
         .expect("error while running tauri application");
 }
 
+
+// -------------- GENERAL FUNCTIONS -------------- //
+
+
 fn get_database_path(app: &tauri::AppHandle) -> Result<PathBuf, String>
 {
     let app_data_dir = app.path().app_data_dir()
@@ -71,7 +75,11 @@ fn setup_database(app: &tauri::AppHandle) -> Result<(), String>
     }
 }
 
-// category and budget struct (optional budget for future implementation)
+
+// -------------- STRUCTS -------------- //
+
+
+// for categories and budgets page functions
 #[derive(Deserialize, serde::Serialize)]
 struct CategoryWithBudget {
     name: String,
@@ -81,6 +89,22 @@ struct CategoryWithBudget {
     year: Option<i32>,
     c_id: Option<i64>
 }
+
+// for expenditures page functions
+#[derive(Deserialize, serde::Serialize)]
+struct CategoryWithExpenditure {
+    c_id: Option<i64>,
+    name: String,
+    e_id: Option<i64>,
+    amount: String,
+    note: String,
+    year: Option<i64>,
+    month: Option<i64>,
+    day: Option<i64>
+}
+
+
+// -------------- CATEGORIES AND BUDGETS PAGE FUNCTIONS -------------- //
 
 
 // adding a category with a budget to the database
@@ -235,12 +259,11 @@ fn change_category_and_budget(app: tauri::AppHandle, category: CategoryWithBudge
     // change the values in BUDGETS
     tx.execute
     (
-        "UPDATE BUDGETS
-        SET bdgt_amount = ?1
-        WHERE cat_id = ?2
-        AND bdgt_month = ?3
-        AND bdgt_year = ?4",
-        params![budget, catid, month, year],
+        "INSERT INTO BUDGETS (bdgt_month, bdgt_year, cat_id, bdgt_amount)
+        VALUES (?1, ?2, ?3, ?4)
+        ON CONFLICT(bdgt_month, bdgt_year, cat_id)
+        DO UPDATE SET bdgt_amount = excluded.bdgt_amount",
+        params![month, year, catid, budget],
     )
     .map_err(|error| error.to_string())?;
 
@@ -410,3 +433,8 @@ fn delete_category(app: tauri::AppHandle, category: CategoryWithBudget) -> Resul
     Ok(())
 
 }
+
+
+// -------------- EXPENDITURES PAGE FUNCTIONS -------------- //
+
+

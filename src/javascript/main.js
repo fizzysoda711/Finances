@@ -6,7 +6,9 @@ import { setupPageChangeButtons } from "./page_change.js";
 
 import { updateDash } from "./dashboard_page.js";
 
-import { loadCategories } from "./categories_page.js"
+import { loadCategories } from "./categories_page.js";
+
+import "./expenditures_page.js";
 
 
 // is it running?
