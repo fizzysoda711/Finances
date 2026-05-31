@@ -5,6 +5,8 @@ use std::fs;
 use std::path::PathBuf;
 use tauri::Manager;
 
+use chrono::{Datelike, Local};
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() 
 {
@@ -22,7 +24,10 @@ pub fn run()
             add_category_and_budget,
             add_category_without_budget,
             get_categories_and_budgets,
-            change_category_and_budget
+            change_category_and_budget,
+            archive_category,
+            get_archived_categories_and_budgets,
+            unarchive_category
 
         ])
         .run(tauri::generate_context!())
@@ -142,6 +147,12 @@ fn add_category_without_budget(app: tauri::AppHandle, category: CategoryWithBudg
 #[tauri::command]
 fn get_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithBudget>, String>
 {
+    // get the date
+    let today = Local::now();
+
+    let month = today.month() as i32;
+    let year = today.year();
+
     // connect to the database
     let conn = get_connection(&app)?;
 
@@ -156,22 +167,28 @@ fn get_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithB
             BUDGETS.bdgt_year,
             CATEGORIES.cat_id
         FROM CATEGORIES
-        LEFT JOIN BUDGETS ON CATEGORIES.cat_id = BUDGETS.cat_id"
+        LEFT JOIN BUDGETS 
+            ON CATEGORIES.cat_id = BUDGETS.cat_id
+            AND BUDGETS.bdgt_month = ?1
+            AND BUDGETS.bdgt_year = ?2
+        WHERE CATEGORIES.is_archived = 0"
     )
     .map_err(|error| error.to_string())?;
 
     // map each row into a CategoryWithBudget struct
-    let category_rows = statement.query_map([], |row| 
-    {
-        Ok(CategoryWithBudget {
-            name: row.get(0)?,
-            color: row.get(1)?,
-            budget: row.get(2)?,
-            month: row.get(3)?,
-            year: row.get(4)?,
-            c_id: row.get(5)?
-        })
-    })
+    let category_rows = statement.query_map(
+        params![month, year],
+        |row| {
+            Ok(CategoryWithBudget {
+                name: row.get(0)?,
+                color: row.get(1)?,
+                budget: row.get(2)?,
+                month: row.get(3)?,
+                year: row.get(4)?,
+                c_id: row.get(5)?,
+            })
+        },
+    )
     .map_err(|error| error.to_string())?;
 
     // create an empty list to store each struct
@@ -210,7 +227,7 @@ fn change_category_and_budget(app: tauri::AppHandle, category: CategoryWithBudge
          SET cat_name = ?1,
              cat_color = ?2
          WHERE cat_id = ?3",
-        params![category.name, category.color, category.c_id],
+        params![category.name, category.color, catid],
     )
     .map_err(|error| error.to_string())?;
 
@@ -229,6 +246,112 @@ fn change_category_and_budget(app: tauri::AppHandle, category: CategoryWithBudge
     // finish the transaction
     tx.commit()
         .map_err(|error| error.to_string())?;
+
+    Ok(())
+}
+
+
+// get the categories with or without budgets from the database
+#[tauri::command]
+fn get_archived_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithBudget>, String>
+{
+    // get the date
+    let today = Local::now();
+
+    let month = today.month() as i32;
+    let year = today.year();
+
+    // connect to the database
+    let conn = get_connection(&app)?;
+
+    // select and join categories with budgets (allowing for categories without budgets)
+    let mut statement = conn.prepare
+    (
+        "SELECT 
+            CATEGORIES.cat_name,
+            CATEGORIES.cat_color,
+            BUDGETS.bdgt_amount,
+            BUDGETS.bdgt_month,
+            BUDGETS.bdgt_year,
+            CATEGORIES.cat_id
+        FROM CATEGORIES
+        LEFT JOIN BUDGETS 
+            ON CATEGORIES.cat_id = BUDGETS.cat_id
+            AND BUDGETS.bdgt_month = ?1
+            AND BUDGETS.bdgt_year = ?2
+        WHERE CATEGORIES.is_archived = 1"
+    )
+    .map_err(|error| error.to_string())?;
+
+    // map each row into a CategoryWithBudget struct
+    let category_rows = statement.query_map(
+        params![month, year],
+        |row| {
+            Ok(CategoryWithBudget {
+                name: row.get(0)?,
+                color: row.get(1)?,
+                budget: row.get(2)?,
+                month: row.get(3)?,
+                year: row.get(4)?,
+                c_id: row.get(5)?,
+            })
+        },
+    )
+    .map_err(|error| error.to_string())?;
+
+    // create an empty list to store each struct
+    let mut categories = Vec::new();
+
+    // put the structs in the list
+    for category_row in category_rows
+    {
+        categories.push(category_row.map_err(|error| error.to_string())?);
+    }
+
+    Ok(categories)
+}
+
+
+#[tauri::command]
+fn archive_category(app: tauri::AppHandle, category: CategoryWithBudget) -> Result<(), String>
+{
+    // connect to the database
+    let conn = get_connection(&app)?;
+
+    // get the cat_id
+    let catid = category.c_id.ok_or("Missing category id")?;
+
+    // insert the values into CATEGORIES
+    conn.execute
+    (
+        "UPDATE CATEGORIES
+        SET is_archived = 1
+        WHERE cat_id = ?1",
+        params![catid]
+    )
+    .map_err(|error| error.to_string())?;    
+
+    Ok(())
+}
+
+#[tauri::command]
+fn unarchive_category(app: tauri::AppHandle, category: CategoryWithBudget) -> Result<(), String>
+{
+    // connect to the database
+    let conn = get_connection(&app)?;
+
+    // get the cat_id
+    let catid = category.c_id.ok_or("Missing category id")?;
+
+    // insert the values into CATEGORIES
+    conn.execute
+    (
+        "UPDATE CATEGORIES
+        SET is_archived = 0
+        WHERE cat_id = ?1",
+        params![catid]
+    )
+    .map_err(|error| error.to_string())?;    
 
     Ok(())
 }
