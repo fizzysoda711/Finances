@@ -6,7 +6,8 @@ import
 { 
     showLoadingScreen, 
     hideLoadingScreen, 
-    getDate
+    getDate,
+    showToast
 } 
 from "./helpers.js";
 
@@ -288,15 +289,34 @@ export async function loadCategories()
 
         // when you click the archive category button
         optionsMenuArchiveButton.addEventListener("click", async function() {
-            const change_archive = {
+            const categoryToArchive = {
                 c_id: category.c_id,
                 name: category.name,
                 color: category.color,
             };
 
-            await invoke("archive_category", { category: change_archive });
+            await invoke("archive_category", { category: categoryToArchive });
             await loadCategories();
             await loadArchivedCategories();
+        });
+
+        // when you click the delete category button
+        optionsMenuDeleteButton.addEventListener("click", async function() {
+            const categoryToDelete = {
+                c_id: category.c_id,
+                name: category.name,
+                color: category.color,
+            };
+
+            try 
+            {
+                await invoke("delete_category", { category: categoryToDelete });
+                await loadCategories();
+            }
+            catch (error) 
+            {
+                showToast(error);
+            }
         });
 
         // closes the options menu when anything is clicked on the screen

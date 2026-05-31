@@ -47,3 +47,15 @@ export function getDate()
         D: day
     };
 }
+
+// function to display toast message with custom message
+export function showToast(message) {
+    const toast = document.querySelector(".toast-message");
+
+    toast.textContent = message;
+    toast.classList.remove("hidden");
+
+    setTimeout(function () {
+        toast.classList.add("hidden");
+    }, 2500);
+}

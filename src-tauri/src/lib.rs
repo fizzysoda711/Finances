@@ -25,9 +25,10 @@ pub fn run()
             add_category_without_budget,
             get_categories_and_budgets,
             change_category_and_budget,
-            archive_category,
             get_archived_categories_and_budgets,
-            unarchive_category
+            archive_category,
+            unarchive_category,
+            delete_category
 
         ])
         .run(tauri::generate_context!())
@@ -354,4 +355,58 @@ fn unarchive_category(app: tauri::AppHandle, category: CategoryWithBudget) -> Re
     .map_err(|error| error.to_string())?;    
 
     Ok(())
+}
+
+
+#[tauri::command]
+fn delete_category(app: tauri::AppHandle, category: CategoryWithBudget) -> Result<(), String>
+{
+    // connect to the database
+    let mut conn = get_connection(&app)?;
+
+    // start a transaction so data isn't half saved
+    let tx = conn.transaction()
+        .map_err(|error| error.to_string())?;
+
+    // get the cat_id
+    let catid = category.c_id.ok_or("Missing category id")?;
+
+    // check if the category has any attached expenditures
+    let expenditure_count: i64 = tx.query_row
+    (
+        "SELECT COUNT(*)
+        FROM EXPENDITURES
+        WHERE cat_id = ?1",
+        params![catid],
+        |row| row.get(0),
+    )
+    .map_err(|error| error.to_string())?;    
+
+    // if it has expenditures, return an error
+    if expenditure_count > 0 
+    {
+        return Err("This category has expenditures and cannot be deleted.".to_string());
+    }
+
+    // otherwise delete budgets attached to it and then the category
+    tx.execute(
+        "DELETE FROM BUDGETS
+         WHERE cat_id = ?1",
+        params![catid],
+    )
+    .map_err(|error| error.to_string())?;
+
+    tx.execute(
+        "DELETE FROM CATEGORIES
+         WHERE cat_id = ?1",
+        params![catid],
+    )
+    .map_err(|error| error.to_string())?;
+
+    // end the transaction
+    tx.commit()
+        .map_err(|error| error.to_string())?;
+
+    Ok(())
+
 }
