@@ -1,3 +1,8 @@
+/* Make date inputs dark mode */
+input[type="date"] 
+{
+  color-scheme: dark;
+}
 
 /* Controls the whole screen */
 body

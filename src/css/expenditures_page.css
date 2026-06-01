@@ -11,10 +11,112 @@
 .new-expenditure-inputs
 {
     width: 100%;
-    height: 100px;
 
     background-color: var(--color-accent-dark);
     border-radius: 10px;
     
     margin-top: 60px;
+    margin-bottom: 60px;
+    
+    font-size: 18px;
+}
+
+.new-expenditure-inputs-row
+{
+    display: flex;
+    justify-content: space-between;
+
+    width: calc(100% - 120px);
+
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.new-expenditure-input-label
+{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    
+    color: var(--color-accent-light);
+}
+
+.new-expenditure-input-input
+{
+    flex: 1;
+
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-background);
+    border-style: inset;
+    border-width: 2px;
+    color: var(--color-text);
+
+    border-radius: 8px;
+
+    margin-left: 10px;
+    margin-right: 30px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    height: 30px;
+}
+
+.new-expenditure-input-amount-input
+{
+    text-align: right;
+}
+
+.new-expenditure-input-date-input
+{
+    margin-right: 0px;
+}
+
+.new-expenditure-input-note-input
+{
+    padding-top: 10px;
+}
+
+.expenditure-input-categories-dropdown {
+    appearance: none;
+    -webkit-appearance: none;
+
+    padding-left: 10px;
+    padding-right: 35px;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b7b7b7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+}
+
+.save-new-expenditure-button
+{
+    background-color: transparent;
+    border: none;
+    color: green;
+    border-radius: 10px;
+    
+
+    margin-left: auto;
+    line-height: 0;
+}
+.save-new-expenditure-button:hover
+{
+    background-color: rgba(255, 255, 255, 0.060);
+}
+
+.cancel-new-expenditure-button
+{
+    background-color: transparent;
+    border: none;
+    color: red;
+    border-radius: 10px;
+
+    margin-left: auto;
+    line-height: 0;
+}
+.cancel-new-expenditure-button:hover
+{
+    background-color: rgba(255, 255, 255, 0.060);
 }

@@ -162,10 +162,41 @@
         <h2>+ New Expenditure</h2>
       </button>
 
-      <div class="new-expenditure-inputs row hidden">
-        <select class="expenditure-input-categories-dropdown">
-          <option class="expenditure-input-categories-dropdown-options" value="">Choose a category</option>
-        </select>
+      <!-- to create new expenditures -->
+      <div class="new-expenditure-inputs column vertical-center hidden">
+        <div class="new-expenditure-inputs-row row">
+          <p class="new-expenditure-input-label vertical-center">Category:
+            <select class="expenditure-input-categories-dropdown new-expenditure-input-input">
+              <option class="expenditure-input-categories-dropdown-options" value="">Choose a category</option>
+            </select>
+          </p>
+
+          <p class="new-expenditure-input-label vertical-center">Amount: <input class="new-expenditure-input-amount-input new-expenditure-input-input" type="text" inputmode="numeric" placeholder="Add the amount"></p>
+        
+          <p class="new-expenditure-input-label vertical-center">Date: <input class="new-expenditure-input-date-input new-expenditure-input-input" type="date"></p>
+        </div>
+
+        <div class="new-expenditure-inputs-row row vertical-center">
+          <p class="new-expenditure-input-label vertical-center">Note: 
+            <textarea 
+              class="new-expenditure-input-note-input new-expenditure-input-input" 
+              placeholder="Enter a note"
+              maxlength="400"></textarea>
+          </p>
+
+          <div class="new-expenditure-buttons">
+            <button class="save-new-expenditure-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6 9 17l-5-5"/>
+              </svg>
+            </button>
+            <button class="cancel-new-expenditure-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
 
     </section>
