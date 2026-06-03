@@ -11,6 +11,8 @@ import
 } 
 from "./helpers.js";
 
+import { getDropdownCategories } from "./expenditures_page.js"
+
 // CATEGORIES PAGE-SPECIFIC HELPERS
 
 // clear and close new category creating input fields
@@ -99,9 +101,9 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
     let catBudget = document.querySelector(".make-new-category-budget-input").value;
     
     // check that all three fields are filled out
-    if (catName === "" || catColor === "" || catBudget === "") 
+    if (catName === "" || catColor === "") 
     {
-        document.querySelector(".make-new-category-error-message").textContent = "Please fill out all fields.";
+        document.querySelector(".make-new-category-error-message").textContent = "Please fill out color and category name.";
         document.querySelector(".make-new-category-error-message").classList.remove("hidden");
         return;
     }
@@ -109,15 +111,12 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
     // get the date
     let currentDate = getDate();
 
-    // make budget into a number (and remove decimals)
-    catBudget = Math.round(Number(catBudget) * 100);
-
     // create javascript object
     let newCategory =
     {
         name: catName,
         color: catColor,
-        budget: catBudget,
+        budget: catBudget == "" ? null : Math.round(Number(catBudget) * 100),
         month: currentDate.M,
         year: currentDate.Y
     }
@@ -126,11 +125,20 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
     // show the loading screen
     showLoadingScreen("Saving category");
 
+
     try
     {
-        // send newCategory to add_category function in rust as category
-        await invoke("add_category_and_budget", { category: newCategory});
-
+        // using a different rust function depending on if there's a budget or not
+        if (newCategory.budget == null)
+        {
+            await invoke("add_category_without_budget", { category: newCategory});
+            showToast("No budget set. Expenses will act as the budget.");
+        }
+        else
+        {
+            await invoke("add_category_and_budget", { category: newCategory});
+        }
+    
         // clear and close new category popup box
         closeNewCategoryPopup();
     }
@@ -143,6 +151,7 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
     {
         hideLoadingScreen();
         loadCategories();
+        getDropdownCategories(); // for expense creation
     }
 
 });
@@ -342,6 +351,19 @@ document.querySelector(".archived-categories-dropdown-button").addEventListener(
 // load archived categories
 export async function loadArchivedCategories()
 {
+    // checking if there's any archived categories
+    const archivedCount = await invoke("count_archived_categories");
+
+    if (archivedCount > 0)
+    {
+        document.querySelector(".archived-categories-dropdown-button").classList.remove("hidden");
+        document.querySelector(".archived-categories-dropdown-button-text").textContent = "View Archived Categories (" + archivedCount + ")";
+    }
+    else
+    {
+        document.querySelector(".archived-categories-dropdown-button").classList.add("hidden");
+    }
+
     const categories = await invoke("get_archived_categories_and_budgets");
 
     const container = document.querySelector(".archived-categories-list");
@@ -378,7 +400,7 @@ export async function loadArchivedCategories()
 
                             <div class="category-box-options-menu-edit hidden">
                                 <p class="category-box-options-menu-edit-text">Name: <input class="edit-category-name-input" type="text" value="${category.name}" maxLength="50"></p>
-                                <p class="category-box-options-menu-edit-text">Budget: <input class="edit-category-budget-input" type="text" inputmode="numeric" value="${(category.budget / 100).toFixed(2)}"></p>
+                                <p class="category-box-options-menu-edit-text">Budget: <input class="edit-category-budget-input" type="text" inputmode="numeric" value="${category.budget === null ? "" : (category.budget / 100).toFixed(2)}"></p>
                                 <p class="category-box-options-menu-edit-text">Color: <input class="edit-category-color-input" type="color" value="${category.color}"></p>
                                 <button class="category-box-options-menu-edit-save horizontal-center">Save</button>
                             </div>
@@ -491,6 +513,25 @@ export async function loadArchivedCategories()
             await invoke("unarchive_category", { category: change_archive });
             await loadCategories();
             await loadArchivedCategories();
+        });
+
+        // when you click the delete category button
+        optionsMenuDeleteButton.addEventListener("click", async function() {
+            const categoryToDelete = {
+                c_id: category.c_id,
+                name: category.name,
+                color: category.color,
+            };
+
+            try 
+            {
+                await invoke("delete_category", { category: categoryToDelete });
+                await loadArchivedCategories();
+            }
+            catch (error) 
+            {
+                showToast(error);
+            }
         });
 
         // closes the options menu when anything is clicked on the screen

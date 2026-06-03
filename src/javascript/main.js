@@ -16,8 +16,18 @@ console.log("main.js is running");
 
 
 // run on start of the app
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
     setupPageChangeButtons(); // setup clicker event for changing pages buttons
+    try
+    {
+        await invoke("new_month_budget_transfer"); // make sure budgets are transfered to next month
+        console.log("budget transfer done")
+    }
+    catch (error)
+    {
+        console.log("budget transfer failed:", error);
+    }
+    
     loadCategories(); // load the categories
     updateDash(); // update the dashboard in home
 

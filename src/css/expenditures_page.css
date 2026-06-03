@@ -1,4 +1,4 @@
-.new-expenditure-button
+.new-expense-button
 {
     margin: 30px;
     margin-left: 0px;
@@ -8,7 +8,7 @@
     height: 50px;
 }
 
-.new-expenditure-inputs
+.new-expense-inputs
 {
     width: 100%;
 
@@ -16,35 +16,32 @@
     border-radius: 10px;
     
     margin-top: 60px;
-    margin-bottom: 60px;
+    margin-bottom: 10px;
     
     font-size: 18px;
 }
 
-.new-expenditure-inputs-row
+.new-expense-inputs-row
 {
     display: flex;
     justify-content: space-between;
 
-    width: calc(100% - 120px);
+    width: calc(100% - 60px);
 
-    margin-left: 60px;
-    margin-right: 60px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
-.new-expenditure-input-label
+.new-expense-input-label
 {
     display: flex;
     align-items: center;
-    flex: 1;
     
     color: var(--color-accent-light);
 }
 
-.new-expenditure-input-input
+.new-expense-input-input
 {
-    flex: 1;
-
     background-color: var(--color-accent-dark);
     border-color: var(--color-background);
     border-style: inset;
@@ -54,7 +51,6 @@
     border-radius: 8px;
 
     margin-left: 10px;
-    margin-right: 30px;
 
     padding-left: 10px;
     padding-right: 10px;
@@ -62,22 +58,34 @@
     height: 30px;
 }
 
-.new-expenditure-input-amount-input
+.new-expense-input-amount-label
+{
+    width: 800px;
+
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.new-expense-input-amount-input
 {
     text-align: right;
+
+    display: flex;
+
+    flex-shrink: 1;
+    flex-grow: 0;
 }
 
-.new-expenditure-input-date-input
+.new-expense-input-date-input
 {
     margin-right: 0px;
 }
 
-.new-expenditure-input-note-input
+.new-expense-input-note-input
 {
     padding-top: 10px;
 }
 
-.expenditure-input-categories-dropdown {
+.expense-input-categories-dropdown {
     appearance: none;
     -webkit-appearance: none;
 
@@ -90,7 +98,7 @@
     background-size: 14px;
 }
 
-.save-new-expenditure-button
+.save-new-expense-button
 {
     background-color: transparent;
     border: none;
@@ -101,12 +109,12 @@
     margin-left: auto;
     line-height: 0;
 }
-.save-new-expenditure-button:hover
+.save-new-expense-button:hover
 {
     background-color: rgba(255, 255, 255, 0.060);
 }
 
-.cancel-new-expenditure-button
+.cancel-new-expense-button
 {
     background-color: transparent;
     border: none;
@@ -116,7 +124,12 @@
     margin-left: auto;
     line-height: 0;
 }
-.cancel-new-expenditure-button:hover
+.cancel-new-expense-button:hover
 {
     background-color: rgba(255, 255, 255, 0.060);
+}
+
+.new-expense-error-message
+{
+    color: red;
 }

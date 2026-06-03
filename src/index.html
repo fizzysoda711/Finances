@@ -34,7 +34,7 @@
           </svg>
       </button>
 
-      <button class="expenditures-button sidebar-button sidebar-icon-button">
+      <button class="expenses-button sidebar-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/>
             <path d="m16 19 3 3 3-3"/>
@@ -131,8 +131,8 @@
 
       <!-- archived categories list (made dynamically) -->
       <div class="archived-categories-dropdown">
-        <button class="archived-categories-dropdown-button button row vertical-center">
-          <p class="archived-categories-dropdown-button-text">View Archived Categories</p>
+        <button class="archived-categories-dropdown-button hidden button row vertical-center">
+          <p class="archived-categories-dropdown-button-text">View Archived Categories (0)</p>
           <svg xmlns="http://www.w3.org/2000/svg" class="archived-categories-dropdown-button-icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
             <path d="m9 18 6-6-6-6"/>
           </svg>
@@ -152,45 +152,45 @@
       </div>
     </section>
 
-    <!-- EXPENDITURES PAGE -->
-    <section class="page expenditures-page hidden">
+    <!-- EXPENSES PAGE -->
+    <section class="page expenses-page hidden">
       <div class="title">
-        <h2>Expenditures</h2>
+        <h2>Expenses</h2>
       </div>
 
-      <button class="new-expenditure-button button full-center">
-        <h2>+ New Expenditure</h2>
+      <button class="new-expense-button button full-center">
+        <h2>+ New Expense</h2>
       </button>
 
-      <!-- to create new expenditures -->
-      <div class="new-expenditure-inputs column vertical-center hidden">
-        <div class="new-expenditure-inputs-row row">
-          <p class="new-expenditure-input-label vertical-center">Category:
-            <select class="expenditure-input-categories-dropdown new-expenditure-input-input">
-              <option class="expenditure-input-categories-dropdown-options" value="">Choose a category</option>
+      <!-- to create new expense -->
+      <div class="new-expense-inputs column vertical-center hidden">
+        <div class="new-expense-inputs-row row">
+          <p class="new-expense-input-label vertical-center">Category:
+            <select class="expense-input-categories-dropdown new-expense-input-input">
+              <option class="expense-input-categories-dropdown-options" value="">Choose a category</option>
             </select>
           </p>
 
-          <p class="new-expenditure-input-label vertical-center">Amount: <input class="new-expenditure-input-amount-input new-expenditure-input-input" type="text" inputmode="numeric" placeholder="Add the amount"></p>
+          <p class="new-expense-input-label new-expense-input-amount-label vertical-center">Amount: <input class="new-expense-input-amount-input new-expense-input-input" type="text" inputmode="numeric" placeholder="Add the amount"></p>
         
-          <p class="new-expenditure-input-label vertical-center">Date: <input class="new-expenditure-input-date-input new-expenditure-input-input" type="date"></p>
+          <p class="new-expense-input-label vertical-center">Date: <input class="new-expense-input-date-input new-expense-input-input" type="date"></p>
         </div>
 
-        <div class="new-expenditure-inputs-row row vertical-center">
-          <p class="new-expenditure-input-label vertical-center">Note: 
+        <div class="new-expense-inputs-row row vertical-center">
+          <p class="new-expense-input-label vertical-center">Note: 
             <textarea 
-              class="new-expenditure-input-note-input new-expenditure-input-input" 
+              class="new-expense-input-note-input new-expense-input-input" 
               placeholder="Enter a note"
               maxlength="400"></textarea>
           </p>
 
-          <div class="new-expenditure-buttons">
-            <button class="save-new-expenditure-button">
+          <div class="new-expense-buttons">
+            <button class="save-new-expense-button">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 6 9 17l-5-5"/>
               </svg>
             </button>
-            <button class="cancel-new-expenditure-button">
+            <button class="cancel-new-expense-button">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
               </svg>
@@ -198,6 +198,8 @@
           </div>
         </div>
       </div>
+
+      <p class="new-expense-error-message hidden">error</p>
 
     </section>
 

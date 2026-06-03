@@ -19,8 +19,8 @@ export function setupPageChangeButtons() {
     showPage(".savings-page");
   });
 
-  document.querySelector(".expenditures-button").addEventListener("click", function () {
-    showPage(".expenditures-page");
+  document.querySelector(".expenses-button").addEventListener("click", function () {
+    showPage(".expenses-page");
   });
 
   document.querySelector(".settings-button").addEventListener("click", function () {
