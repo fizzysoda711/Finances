@@ -107,7 +107,7 @@
       <!-- make a new category popup -->
       <div class="hidden make-new-category-popup">
         <div class="new-category-inputs">
-          <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="50"></p>
+          <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="30"></p>
           <p class="make-new-category-budget">Budget: <input class="make-new-category-budget-input" type="text" inputmode="numeric" placeholder="Enter your budget"></p>
           <p class="make-new-category-budget">Color: <input class="make-new-category-color-input" type="color"></p>
           <div>
@@ -164,27 +164,32 @@
 
       <!-- to create new expense -->
       <div class="new-expense-inputs column vertical-center hidden">
-        <div class="new-expense-inputs-row row">
-          <p class="new-expense-input-label vertical-center">Category:
+
+        <div class="new-expense-inputs-top-row row vertical-center">
+          <p class="new-expense-input-label expense-input-categories-dropdown-label vertical-center">Category:
             <select class="expense-input-categories-dropdown new-expense-input-input">
               <option class="expense-input-categories-dropdown-options" value="">Choose a category</option>
             </select>
           </p>
 
-          <p class="new-expense-input-label new-expense-input-amount-label vertical-center">Amount: <input class="new-expense-input-amount-input new-expense-input-input" type="text" inputmode="numeric" placeholder="Add the amount"></p>
-        
-          <p class="new-expense-input-label vertical-center">Date: <input class="new-expense-input-date-input new-expense-input-input" type="date"></p>
+          <p class="new-expense-input-label new-expense-input-amount-label vertical-center">Amount: 
+            <input class="new-expense-input-amount-input new-expense-input-input" type="text" inputmode="numeric" placeholder="Enter the amount">
+          </p>
         </div>
 
-        <div class="new-expense-inputs-row row vertical-center">
-          <p class="new-expense-input-label vertical-center">Note: 
+        <div class="new-expense-inputs-bottom-row row vertical-center">
+          <p class="new-expense-input-label new-expense-input-date-label vertical-center">Date: 
+            <input class="new-expense-input-date-input new-expense-input-input" type="date">
+          </p>
+
+          <p class="new-expense-input-label new-expense-input-note-label vertical-center">Note: 
             <textarea 
               class="new-expense-input-note-input new-expense-input-input" 
               placeholder="Enter a note"
               maxlength="400"></textarea>
           </p>
 
-          <div class="new-expense-buttons">
+          <div class="new-expense-buttons verical-center">
             <button class="save-new-expense-button">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 6 9 17l-5-5"/>
@@ -197,6 +202,7 @@
             </button>
           </div>
         </div>
+
       </div>
 
       <p class="new-expense-error-message hidden">error</p>

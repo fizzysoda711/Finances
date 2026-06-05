@@ -47,6 +47,8 @@
     border-color: var(--color-background);
     border-radius: 10px;
     padding: 10px;
+
+    border-style: solid;
 }
 .make-new-category-budget-input
 {
@@ -56,6 +58,8 @@
     border-radius: 10px;
     padding: 10px;
     text-align: right;
+
+    border-style: solid;
 }
 .make-new-category-name-input:focus,
 .make-new-category-budget-input:focus
@@ -145,6 +149,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    margin-top: 8px;
+    min-height: 50px;
+    max-height: 80px;
 }
 .category-box-name 
 {
@@ -165,6 +173,13 @@
 
     font-size: 20px;
     color: var(--color-accent-light);
+
+    margin-bottom: 20px;
+    margin-top: auto;
+
+    bottom: 0;
+
+    height: 40px;
 }
 
 .category-box-options-button
