@@ -13,6 +13,8 @@ from "./helpers.js";
 
 import { getDropdownCategories } from "./expenditures_page.js"
 
+import { loadAllGraphics } from "./graphics.js";
+
 // CATEGORIES PAGE-SPECIFIC HELPERS
 
 // clear and close new category creating input fields
@@ -152,6 +154,7 @@ document.querySelector(".save-new-category-button").addEventListener("click", as
         hideLoadingScreen();
         loadCategories();
         getDropdownCategories(); // for expense creation
+        loadAllGraphics();
     }
 
 });
@@ -285,6 +288,7 @@ export async function loadCategories()
 
             await invoke("change_category_and_budget", { category: editedCategory });
             await loadCategories();
+            await loadAllGraphics();
         });
 
         // budget inputs should only allow two decimal places and no letters
@@ -307,6 +311,7 @@ export async function loadCategories()
             await invoke("archive_category", { category: categoryToArchive });
             await loadCategories();
             await loadArchivedCategories();
+            await loadAllGraphics();
         });
 
         // when you click the delete category button
@@ -321,6 +326,7 @@ export async function loadCategories()
             {
                 await invoke("delete_category", { category: categoryToDelete });
                 await loadCategories();
+                await loadAllGraphics();
             }
             catch (error) 
             {
@@ -513,6 +519,7 @@ export async function loadArchivedCategories()
             await invoke("unarchive_category", { category: change_archive });
             await loadCategories();
             await loadArchivedCategories();
+            await loadAllGraphics();
         });
 
         // when you click the delete category button

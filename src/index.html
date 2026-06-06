@@ -99,49 +99,63 @@
         <h2>Categories & Budgets</h2>
       </div>
 
-      <!-- new category button -->
-      <button class="new-category-button button full-center">
-        <h2>+ New Category</h2>
-      </button>
+      <div class="categories-section">
+        <!-- new category button -->
 
-      <!-- make a new category popup -->
-      <div class="hidden make-new-category-popup">
-        <div class="new-category-inputs">
-          <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="30"></p>
-          <p class="make-new-category-budget">Budget: <input class="make-new-category-budget-input" type="text" inputmode="numeric" placeholder="Enter your budget"></p>
-          <p class="make-new-category-budget">Color: <input class="make-new-category-color-input" type="color"></p>
-          <div>
-            <button class="save-new-category-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5"/>
+        <div class="categories-section-top-bar row vertical-center">
+          <p class="categories-section-title">Categories</p>
+          <button class="new-category-button full-center">
+            <h2>+</h2>
+          </button>
+        </div>
+
+        <div class="categories-boxes-section">
+          <!-- make a new category popup -->
+          <div class="hidden make-new-category-popup">
+            <div class="new-category-inputs">
+              <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="30"></p>
+              <p class="make-new-category-budget">Budget: <input class="make-new-category-budget-input" type="text" inputmode="numeric" placeholder="Enter your budget"></p>
+              <p class="make-new-category-budget">Color: <input class="make-new-category-color-input" type="color"></p>
+              <div>
+                <button class="save-new-category-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5"/>
+                  </svg>
+                </button>
+                <button class="cancel-new-category-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <p class="make-new-category-error-message hidden">Could not create new category.</p>
+          </div>
+
+          <!-- categories list (made dynamically) -->
+          <div class="categories-list"></div>
+
+          <!-- archived categories list (made dynamically) -->
+          <div class="archived-categories-dropdown">
+            <button class="archived-categories-dropdown-button hidden button row vertical-center">
+              <p class="archived-categories-dropdown-button-text">View Archived Categories (0)</p>
+              <svg xmlns="http://www.w3.org/2000/svg" class="archived-categories-dropdown-button-icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m9 18 6-6-6-6"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" class="archived-categories-dropdown-button-icon-open hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6"/>
               </svg>
             </button>
-            <button class="cancel-new-category-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
-              </svg>
-            </button>
+
+            <div class="archived-categories-list hidden"></div>
           </div>
         </div>
-        <p class="make-new-category-error-message hidden">Could not create new category.</p>
       </div>
 
-      <!-- categories list (made dynamically) -->
-      <div class="categories-list"></div>
-
-      <!-- archived categories list (made dynamically) -->
-      <div class="archived-categories-dropdown">
-        <button class="archived-categories-dropdown-button hidden button row vertical-center">
-          <p class="archived-categories-dropdown-button-text">View Archived Categories (0)</p>
-          <svg xmlns="http://www.w3.org/2000/svg" class="archived-categories-dropdown-button-icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m9 18 6-6-6-6"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" class="archived-categories-dropdown-button-icon-open hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m6 9 6 6 6-6"/>
-          </svg>
-        </button>
-
-        <div class="archived-categories-list hidden"></div>
+      <div class="categories-page-charts horizontal-center">
+        <div class="categories-page-pie-chart-wrapper horizontal-center">
+          <canvas class="categories-page-pie-chart"></canvas>
+        </div>
       </div>
     </section>
 

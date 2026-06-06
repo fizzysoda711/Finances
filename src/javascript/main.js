@@ -2,13 +2,16 @@
 const invoke = window.__TAURI__.core.invoke;
 
 // imports from other js files
+import { loadAllGraphics } from "./graphics.js";
+
 import { setupPageChangeButtons } from "./page_change.js";
 
 import { updateDash } from "./dashboard_page.js";
 
-import { loadCategories } from "./categories_page.js";
+import { loadCategories, loadArchivedCategories } from "./categories_page.js";
 
 import "./expenditures_page.js";
+
 
 
 // is it running?
@@ -30,6 +33,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     
     loadCategories(); // load the categories
     updateDash(); // update the dashboard in home
+    loadArchivedCategories(); // load archived categories if any
+    loadAllGraphics(); // load all graphics
+
 
     setInterval(updateDash, 60000); // update the dashboard every minute
 });
