@@ -1,11 +1,69 @@
-.new-expense-button
+.expenses-list-section
 {
-    margin: 30px;
-    margin-left: 0px;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    width: 200px;
+    position: fixed;
+
+    left: 73px;
+    top: 100px;
+    bottom: 3px;
+
+    width: calc(100% - 500px);
+
+    outline: solid;
+    outline-color: var(--color-accent-dark);
+
+    background-color: rgba(255, 255, 255, 0.025);
+
+    border-radius: 10px;
+}
+
+.expenses-list-top-bar
+{
+    display: flex;
+    justify-content: space-between;
+
+    background-color: var(--color-accent-dark);
+
     height: 50px;
+    width: calc(100% - 40px);
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.expenses-list-title
+{
+    color: var(--color-accent-light);
+
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.expenses-list-top-bar-buttons
+{
+    width: 90px;
+    height: 35px;
+
+    display: flex;
+    gap: 20px;
+}
+.new-expense-button,
+.sort-expenses-button
+{
+    display: flex;
+    
+
+    padding: 0;
+
+    height: 35px;
+    width: 35px;
+
+    background: none;
+    border-style: solid;
+    border-radius: 8px;
+
+    border-color: var(--color-background);
+
+    color: var(--color-text);
 }
 
 .new-expense-inputs

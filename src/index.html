@@ -116,7 +116,7 @@
               <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="30"></p>
               <p class="make-new-category-budget">Budget: <input class="make-new-category-budget-input" type="text" inputmode="numeric" placeholder="Enter your budget"></p>
               <p class="make-new-category-budget">Color: <input class="make-new-category-color-input" type="color"></p>
-              <div>
+              <div class="make-new-category-buttons">
                 <button class="save-new-category-button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20 6 9 17l-5-5"/>
@@ -129,7 +129,9 @@
                 </button>
               </div>
             </div>
-            <p class="make-new-category-error-message hidden">Could not create new category.</p>
+
+            <p class="make-new-category-error-message row hidden">Could not create new category.</p>
+
           </div>
 
           <!-- categories list (made dynamically) -->
@@ -172,55 +174,79 @@
         <h2>Expenses</h2>
       </div>
 
-      <button class="new-expense-button button full-center">
-        <h2>+ New Expense</h2>
-      </button>
+      <div class="expenses-list-section">
+        <div class="expenses-list-top-bar vertical-center">
+          <!-- expenses list section title -->
+          <p class="expenses-list-title vertical-center">Expenses</p>
 
-      <!-- to create new expense -->
-      <div class="new-expense-inputs column vertical-center hidden">
-
-        <div class="new-expense-inputs-top-row row vertical-center">
-          <p class="new-expense-input-label expense-input-categories-dropdown-label vertical-center">Category:
-            <select class="expense-input-categories-dropdown new-expense-input-input">
-              <option class="expense-input-categories-dropdown-options" value="">Choose a category</option>
-            </select>
-          </p>
-
-          <p class="new-expense-input-label new-expense-input-amount-label vertical-center">Amount: 
-            <input class="new-expense-input-amount-input new-expense-input-input" type="text" inputmode="numeric" placeholder="Enter the amount">
-          </p>
-        </div>
-
-        <div class="new-expense-inputs-bottom-row row vertical-center">
-          <p class="new-expense-input-label new-expense-input-date-label vertical-center">Date: 
-            <input class="new-expense-input-date-input new-expense-input-input" type="date">
-          </p>
-
-          <p class="new-expense-input-label new-expense-input-note-label vertical-center">Note: 
-            <textarea 
-              class="new-expense-input-note-input new-expense-input-input" 
-              placeholder="Enter a note"
-              maxlength="400"></textarea>
-          </p>
-
-          <div class="new-expense-buttons verical-center">
-            <button class="save-new-expense-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5"/>
+          <div class="expenses-list-top-bar-buttons row vertical-center">
+            <!-- to create new expense button -->
+            <button class="new-expense-button full-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/>
+                <path d="M12 5v14"/>
               </svg>
             </button>
-            <button class="cancel-new-expense-button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+
+            <!-- expenses sorting button -->
+            <button class="sort-expenses-button full-center">
+              <svg class="sort-expenses-svg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"/>
               </svg>
             </button>
           </div>
         </div>
 
+        <!-- to create new expense inputs -->
+        <div class="new-expense-inputs column vertical-center hidden">
+
+          <div class="new-expense-inputs-top-row row vertical-center">
+            <p class="new-expense-input-label expense-input-categories-dropdown-label vertical-center">Category:
+              <select class="expense-input-categories-dropdown new-expense-input-input">
+                <option class="expense-input-categories-dropdown-options" value="">Choose a category</option>
+              </select>
+            </p>
+            <p class="new-expense-input-label new-expense-input-amount-label vertical-center">Amount: 
+              <input class="new-expense-input-amount-input new-expense-input-input" type="text" inputmode="numeric" placeholder="Enter the amount">
+            </p>
+          </div>
+
+          <div class="new-expense-inputs-bottom-row row vertical-center">
+            <p class="new-expense-input-label new-expense-input-date-label vertical-center">Date: 
+              <input class="new-expense-input-date-input new-expense-input-input" type="date">
+            </p>
+            <p class="new-expense-input-label new-expense-input-note-label vertical-center">Note: 
+              <textarea 
+                class="new-expense-input-note-input new-expense-input-input" 
+                placeholder="Enter a note"
+                maxlength="400"></textarea>
+            </p>
+
+            <div class="new-expense-buttons verical-center">
+              <button class="save-new-expense-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6 9 17l-5-5"/>
+                </svg>
+              </button>
+              <button class="cancel-new-expense-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <p class="new-expense-error-message hidden">error</p>
+
+        </div>
+
+        <div class="expenses-list">
+          <div class="expenses-list-item">
+            
+          </div>
+        </div>
+
       </div>
-
-      <p class="new-expense-error-message hidden">error</p>
-
     </section>
 
     <!-- SETTINGS PAGE -->

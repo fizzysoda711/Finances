@@ -13,6 +13,35 @@ export function loadAllGraphics()
     loadCategoriesPieChart();
 }
 
+// helpers
+
+function legendAndChartSpacing(space)
+{
+    return {
+        id: "spacingBetweenLegendAndChart",
+
+        beforeInit(chart)
+        {
+            const originalFit = chart.legend.fit;
+
+            chart.legend.fit = function()
+            {
+                originalFit.bind(chart.legend)();
+
+                if(chart.legend.options.position == "top" || chart.legend.options.position === "bottom")
+                {
+                    this.height += space;
+                }
+                else
+                {
+                    this.width += space;
+                }
+            };
+        }
+    };
+}
+
+
 // for the categories page
 
 export async function loadCategoriesPieChart()
@@ -73,7 +102,7 @@ export async function loadCategoriesPieChart()
                         usePointStyle: true,
                         pointStyle: "circle",
                         color: "white",
-                        padding: 15,
+                        padding: 30,
                     }
                 },
 
@@ -91,6 +120,11 @@ export async function loadCategoriesPieChart()
                     }
                 }
             }
-        }
+        },
+
+        plugins:
+        [
+            legendAndChartSpacing(20)
+        ]
     });
 }

@@ -5,13 +5,17 @@
     position: fixed;
 
     top: 100px;
-    bottom: 0px;
-    left: 70px;
+    bottom: 3px;
+    left: 73px;
 
     width: calc(100% - 500px);
 
     outline: solid;
     outline-color: var(--color-accent-dark);
+
+    background-color: rgba(255, 255, 255, 0.025);
+
+    border-radius: 10px;
 }
 
 .categories-section-top-bar
@@ -50,38 +54,37 @@
     color: var(--color-text);
 }
 
-.new-category-inputs
+.make-new-category-popup
 {
     background-color: var(--color-accent-dark);
     
+    border-radius: 10px;
+
+    width: 100%;
+
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    margin-bottom: 30px;
+
+    box-sizing: border-box;
+}
+
+.new-category-inputs
+{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
 
     justify-content: space-between;
 
-    gap: 20px;
-
-    width: 100%;
-
-    border-radius: 10px;
-
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    margin-bottom: 30px;
+    column-gap: 30px;
     
     box-sizing: border-box;
 }
 
-.make-new-category-color-input
-{
-    width: 40px;
-    height: 40px;
-    padding: 0;
-}
 .make-new-category-name,
 .make-new-category-budget,
 .make-new-category-color
@@ -90,10 +93,18 @@
     align-items: center;
     color: var(--color-accent-light);
 
-    margin: 10px;
     gap: 10px;
+
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
+.make-new-category-color-input
+{
+    width: 40px;
+    height: 40px;
+    padding: 0;
+}
 .make-new-category-name-input
 {
     background-color: var(--color-accent-dark);
@@ -120,6 +131,11 @@
 {
     outline: none;
     border: 2px solid rgb(27, 41, 30);
+}
+
+.make-new-category-buttons
+{
+    margin-left: auto;
 }
 
 .save-new-category-button
@@ -186,7 +202,7 @@
     height: 150px;
     box-sizing: border-box;
     min-width: 300px;
-    max-width: 525px;
+    max-width: 630px;
 
     display: flex;
     flex-direction: row;
@@ -418,7 +434,7 @@
 
     overflow: hidden;
 
-    outline: solid;
+    outline: none;
     outline-color: var(--color-accent-dark);
 }
 
