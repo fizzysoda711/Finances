@@ -7,7 +7,7 @@ input[type="date"]
 /* Controls the whole screen */
 body
 {
-    background-color: var(--color-background);
+    background-color: var(--color-accent-dark);
     margin-left: 70px;
     font-family: Arial, sans-serif;
 

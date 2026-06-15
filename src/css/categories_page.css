@@ -11,7 +11,7 @@
     width: calc(100% - 500px);
 
     outline: solid;
-    outline-color: var(--color-accent-dark);
+    outline-color: var(--color-background);
 
     background-color: rgba(255, 255, 255, 0.025);
 

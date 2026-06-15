@@ -21,6 +21,7 @@ pub fn run()
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler!
         [
+            get_total_budget,
             add_category_and_budget,
             add_category_without_budget,
             get_categories_and_budgets,
@@ -104,6 +105,36 @@ struct ExpensesStruct {
     month: Option<i64>,
     day: Option<i64>
 }
+
+
+// -------------- DASHBOARD PAGE FUNCTIONS -------------- //
+
+// getting the sum of all the budgets to get the total budget
+#[tauri::command]
+fn get_total_budget(app: tauri::AppHandle, month: i32, year: i32) -> Result<i64, String>
+{
+    // connect to the database
+    let conn = get_connection(&app)?;
+
+
+    // get the sum
+    let total_budget: i64 = conn.query_row
+    (
+        "SELECT COALESCE(SUM(BUDGETS.bdgt_amount), 0)
+        FROM BUDGETS
+        JOIN CATEGORIES
+            ON CATEGORIES.cat_id = BUDGETS.cat_id
+        WHERE BUDGETS.bdgt_month = ?1 
+            AND BUDGETS.bdgt_year = ?2
+            AND CATEGORIES.is_archived = 0",
+        params![month, year],
+        |row| row.get(0),
+    )
+    .map_err(|error| error.to_string())?;
+
+    Ok(total_budget)
+}
+
 
 
 // -------------- CATEGORIES AND BUDGETS PAGE FUNCTIONS -------------- //

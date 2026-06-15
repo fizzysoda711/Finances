@@ -10,9 +10,11 @@ export function updateDash()
     document.querySelector(".dash-date").textContent = date.MN + " " + date.Y + " Analytics";
 }
 
-// Budget bar fill (to be automated)
+// Budget bar variables
 let budget = 1587;
 let spent = 500;
+
+
 let left = budget - spent;
 let offset;
 

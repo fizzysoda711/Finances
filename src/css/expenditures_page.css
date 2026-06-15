@@ -9,7 +9,7 @@
     width: calc(100% - 500px);
 
     outline: solid;
-    outline-color: var(--color-accent-dark);
+    outline-color: var(--color-background);
 
     background-color: rgba(255, 255, 255, 0.025);
 
@@ -38,19 +38,13 @@
     font-weight: bold;
 }
 
-.expenses-list-top-bar-buttons
-{
-    width: 90px;
-    height: 35px;
 
-    display: flex;
-    gap: 20px;
-}
 .new-expense-button,
 .sort-expenses-button
 {
     display: flex;
     
+    position: fixed;
 
     padding: 0;
 
@@ -65,40 +59,57 @@
 
     color: var(--color-text);
 }
+.new-expense-button
+{
+    right: 500px;
+}
+.sort-expenses-button
+{
+    right: 450px;
+}
+
+.expenses-list
+{
+    padding: 20px;
+}
 
 .new-expense-inputs
 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+
     background-color: var(--color-accent-dark);
     border-radius: 10px;
     
-    margin-top: 60px;
-    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 20px;
     
     font-size: 18px;
 
     padding-left: 20px;
     padding-right: 20px;
-}
-
-.new-expense-inputs-top-row,
-.new-expense-inputs-bottom-row
-{
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-
-    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .new-expense-input-label
 {
     display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
     align-items: center;
+
+    row-gap: 20px;
     
-    flex: 0 1 var(--input-size);
-    min-width: 0;
+    flex-grow: 0;
+    flex-shrink: 1;
 
     color: var(--color-accent-light);
+
+    margin: 0px;
 }
 
 .new-expense-input-input
@@ -106,8 +117,8 @@
     appearance: none;
     -webkit-appearance: none;
 
-    width: 100%;
-    min-width: 0px;
+    display: flex;
+    flex-wrap: wrap;
 
     background-color: var(--color-accent-dark);
     border-color: var(--color-background);
@@ -118,11 +129,9 @@
     block-size: 36px;
     line-height: 30px;
 
-    field-sizing: fixed;
     box-sizing: border-box;
 
     border-radius: 8px;
-    margin-left: 10px;
 
     padding-left: 10px;
     padding-right: 10px;
@@ -138,21 +147,31 @@
 
 .expense-input-categories-dropdown-label
 {
-    --input-size: 700px;
+    flex-basis: 300px;
+
+    min-width: 250px;
+    max-width: 300px;
 }
 .new-expense-input-amount-label
 {
-    --input-size: 400px;
-}
+    flex-basis: 250px;
 
+    min-width: 150px;
+    max-width: 250px;
+}
 .new-expense-input-date-label
 {
+    flex-basis: 150px;
+
     max-width: 150px;
     min-width: 150px;
 }
 .new-expense-input-note-label
 {
-    --input-size: 800px;
+    flex-basis: 500px;
+
+    min-width: 200px;
+    max-width: 500px;
 }
 
 .new-expense-input-amount-input

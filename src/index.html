@@ -197,29 +197,30 @@
           </div>
         </div>
 
-        <!-- to create new expense inputs -->
-        <div class="new-expense-inputs column vertical-center hidden">
+        <div class="expenses-list">
+          <!-- to create new expense inputs -->
+          <div class="new-expense-inputs vertical-center hidden">
 
-          <div class="new-expense-inputs-top-row row vertical-center">
             <p class="new-expense-input-label expense-input-categories-dropdown-label vertical-center">Category:
-              <select class="expense-input-categories-dropdown new-expense-input-input">
+              <select class="expense-input-categories-dropdown new-expense-input-input vertical-center">
                 <option class="expense-input-categories-dropdown-options" value="">Choose a category</option>
               </select>
             </p>
-            <p class="new-expense-input-label new-expense-input-amount-label vertical-center">Amount: 
-              <input class="new-expense-input-amount-input new-expense-input-input" type="text" inputmode="numeric" placeholder="Enter the amount">
-            </p>
-          </div>
 
-          <div class="new-expense-inputs-bottom-row row vertical-center">
-            <p class="new-expense-input-label new-expense-input-date-label vertical-center">Date: 
-              <input class="new-expense-input-date-input new-expense-input-input" type="date">
+            <p class="new-expense-input-label new-expense-input-amount-label vertical-center">Amount: 
+              <input class="new-expense-input-amount-input new-expense-input-input vertical-center" type="text" inputmode="numeric" placeholder="Enter the amount">
             </p>
+
+            <p class="new-expense-input-label new-expense-input-date-label vertical-center">Date: 
+              <input class="new-expense-input-date-input new-expense-input-input vertical-center" type="date">
+            </p>
+
             <p class="new-expense-input-label new-expense-input-note-label vertical-center">Note: 
               <textarea 
-                class="new-expense-input-note-input new-expense-input-input" 
+                class="new-expense-input-note-input new-expense-input-input vertical-center" 
                 placeholder="Enter a note"
-                maxlength="400"></textarea>
+                maxlength="400">
+              </textarea>
             </p>
 
             <div class="new-expense-buttons verical-center">
@@ -234,18 +235,17 @@
                 </svg>
               </button>
             </div>
+
+            <p class="new-expense-error-message hidden">error</p>
+
           </div>
 
-          <p class="new-expense-error-message hidden">error</p>
-
-        </div>
-
-        <div class="expenses-list">
-          <div class="expenses-list-item">
-            
+          <div class="expenses-list">
+            <div class="expenses-list-item">
+              
+            </div>
           </div>
         </div>
-
       </div>
     </section>
 
