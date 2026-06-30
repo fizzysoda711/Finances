@@ -54,10 +54,17 @@ async function closeNewExpensePopup()
 }
 
 // add function to load expenses
-// async function loadExpenses(){}
+async function loadExpenses()
+{
+    // make the sql string
+    sqlMessage = "";
+
+
+}
 
     // how the expenses are loaded will depend on user selections
     // make an object that can hold various selection parameters to send to rust
+
 
 
 // ----- EXPENDITURES PAGE SPECIFIC BEHAVIORS ----- //
@@ -95,20 +102,34 @@ document.querySelector(".save-new-expense-button").addEventListener("click", asy
     let noteInput = document.querySelector(".new-expense-input-note-input").value;
    
     // verify date, amount, and category have inputs
-    if (catid == "" || amountInput == "" || dateInput == "")
+    if (catid == "" || amountInput == "")
     {
         const errorMessage = document.querySelector(".new-expense-error-message");
 
-        errorMessage.textContent = "Please fill out category, amount, and date.";
+        errorMessage.textContent = "Please fill out category and amount.";
         errorMessage.classList.remove("hidden");
         return;
     }
 
-    // split date into year, month, and day (current structure is YYYY-MM-DD)
-    let date = dateInput.split("-");
-    let yearInput = Number(date[0]);
-    let monthInput = Number(date[1]);
-    let dayInput = Number(date[2]);
+    // make varaibles for year, month, and day
+    let yearInput;
+    let monthInput;
+    let dayInput;
+
+    if (dateInput == "")
+    {
+        let date = getDate();
+        yearInput = date.Y;
+        monthInput = date.M;
+        dayInput = date.D;
+    }
+    else
+    {
+        let date = dateInput.split("-");
+        let yearInput = Number(date[0]);
+        let monthInput = Number(date[1]);
+        let dayInput = Number(date[2]);
+    }
 
     // to send to rust function
     let newExpense =
@@ -131,6 +152,45 @@ document.querySelector(".save-new-expense-button").addEventListener("click", asy
         document.querySelector(".new-expense-error-message").textContent = "Save failed: " + error;
         document.querySelector(".new-expense-error-message").classList.remove("hidden"); 
     }
+    finally
+    {
+        await closeNewExpensePopup();
+    }
+    // finish finally block and use load expenses function
+});
 
-    // add finally block and use load expenses function
+// opening and closing the expenses sorting menu
+document.querySelector(".sort-expenses-button").addEventListener("click", async function()
+{
+    document.querySelector(".expenses-sorting-section").classList.toggle("hidden");
+});
+
+// opening and closing the sorting menu sections
+document.querySelector(".date-exepenses-sorting").addEventListener("click", async function()
+{
+    document.querySelector(".date-expenses-sorting-icon-closed").classList.toggle("hidden");
+    document.querySelector(".date-expenses-sorting-icon-open").classList.toggle("hidden");
+
+    document.querySelector(".expenses-sorting-date-selection-menu").classList.toggle("hidden");
+});
+document.querySelector(".category-exepenses-sorting").addEventListener("click", async function()
+{
+    document.querySelector(".category-expenses-sorting-icon-closed").classList.toggle("hidden");
+    document.querySelector(".category-expenses-sorting-icon-open").classList.toggle("hidden");
+
+    document.querySelector(".expenses-sorting-category-selection-menu").classList.toggle("hidden");
+});
+document.querySelector(".amount-exepenses-sorting").addEventListener("click", async function()
+{
+    document.querySelector(".amount-expenses-sorting-icon-closed").classList.toggle("hidden");
+    document.querySelector(".amount-expenses-sorting-icon-open").classList.toggle("hidden");
+
+    document.querySelector(".expenses-sorting-amount-selection-menu").classList.toggle("hidden");
+});
+document.querySelector(".note-exepenses-sorting").addEventListener("click", async function()
+{
+    document.querySelector(".note-expenses-sorting-icon-closed").classList.toggle("hidden");
+    document.querySelector(".note-expenses-sorting-icon-open").classList.toggle("hidden");
+
+    document.querySelector(".expenses-sorting-note-selection-menu").classList.toggle("hidden");
 });

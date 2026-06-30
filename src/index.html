@@ -219,8 +219,7 @@
               <textarea 
                 class="new-expense-input-note-input new-expense-input-input vertical-center" 
                 placeholder="Enter a note"
-                maxlength="400">
-              </textarea>
+                maxlength="400"></textarea>
             </p>
 
             <div class="new-expense-buttons verical-center">
@@ -244,6 +243,83 @@
             <div class="expenses-list-item">
               
             </div>
+          </div>
+
+          <!-- to sort expenses list -->
+          <div class="expenses-sorting-section hidden">
+            <div class="expenses-sorting-section-top-bar row vertical-center">
+              <h3 class="expenses-sorting-title">Sorting</h3>
+
+              <div class="expense-sorting-application-buttons horizontal-center row">
+                <button class="save-new-expense-sorting-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6 9 17l-5-5"/>
+                  </svg>
+                </button>
+                <button class="cancel-new-expense-sorting-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="expenses-sorting-choices horizontal-center column">
+              <button class="expenses-sorting-category date-exepenses-sorting row vertical center">
+                <h3>Date</h3>
+                <svg class="expenses-sorting-icon-closed date-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <svg class="hidden expenses-sorting-icon-open date-expenses-sorting-icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="expenses-sorting-selection-menu expenses-sorting-date-selection-menu hidden">
+
+              </div>
+
+              <button class="expenses-sorting-category category-exepenses-sorting row vertical center">
+                <h3>Categories</h3>
+                <svg class="expenses-sorting-icon-closed category-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <svg class="hidden expenses-sorting-icon-open category-expenses-sorting-icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="expenses-sorting-selection-menu expenses-sorting-category-selection-menu hidden">
+
+              </div>
+
+              <button class="expenses-sorting-category amount-exepenses-sorting row vertical center">
+                <h3>Amount</h3>
+                <svg class="expenses-sorting-icon-closed amount-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <svg class="hidden expenses-sorting-icon-open amount-expenses-sorting-icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="expenses-sorting-selection-menu expenses-sorting-amount-selection-menu hidden">
+
+              </div>
+
+              <button class="expenses-sorting-category note-exepenses-sorting row vertical center">
+                <h3>Note Search</h3>
+                <svg class="expenses-sorting-icon-closed note-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m9 18 6-6-6-6"/>
+                </svg>
+                <svg class="hidden expenses-sorting-icon-open note-expenses-sorting-icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="expenses-sorting-selection-menu expenses-sorting-date-selection-menu hidden">
+
+              </div>
+
+            </div>
+
+
           </div>
         </div>
       </div>
