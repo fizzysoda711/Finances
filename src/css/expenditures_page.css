@@ -68,16 +68,21 @@
     right: 450px;
 }
 
-.expenses-list
+.expenses-list-whole
 {
     padding: 20px;
+
+    height: calc(100vh - 190px);
+    overflow-y: auto;
 }
 
 .new-expense-inputs
 {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+
+    row-gap: 15px;
+    column-gap: 40px;
 
     background-color: var(--color-accent-dark);
     border-radius: 10px;
@@ -128,8 +133,8 @@
     border-width: 2px;
     color: var(--color-text);
 
-    block-size: 36px;
-    line-height: 30px;
+    block-size: 32px;
+    line-height: 23px;
 
     box-sizing: border-box;
 
@@ -241,12 +246,14 @@
     top: 150px;
 
     width: 225px;
-    height: calc(100% - 154px);
+    height: calc(100vh - 154px);
 
     border-radius: 15px 0 15px 15px;
     border: 2px solid var(--color-background);
 
     background-color: var(--color-aside);
+
+    overflow: hidden;
 }
 
 .expenses-sorting-section-top-bar
@@ -303,17 +310,21 @@
 
 .expenses-sorting-choices
 {
-    position: fixed;
+    position: absolute;
 
-    top: 194px;
-    right: 425px;
+    top: 43px;
+    bottom: 0;
 
     width: 229px;
+    height: calc(100vh - 196px);
 
     margin: 0;
-    padding: 0;  
+    padding: 0;
+
+    margin-bottom: auto;
     
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .expenses-sorting-category
@@ -324,13 +335,14 @@
     background-color: var(--color-accent-dark);
 
     height: 40px;
-    width: calc(100% + 2px);
+    width: calc(100% - 4px);
 
     padding-left: 20px;
     padding-right: 15px;
 
     border: 2px solid var(--color-background);
-    border-right: 4px solid var(--color-background);
+    border-right: none;
+    border-left: none;
 
     color: var(--color-accent-light);
 }
@@ -347,6 +359,111 @@
 {
     display: flex;
     
-    height: 50px;
-    width: calc(100% + 2px);
+    width: calc(100% - 44px);
+
+    margin: 0;
+    margin-bottom: 12px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.expenses-sorting-section-header
+{
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.expenses-sorting-subheader
+{
+    font-size: 12px;
+    color: var(--color-text);
+}
+
+.expenses-sorting-info-subheader
+{
+    font-size: 12px;
+    color: var(--color-text);
+
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+input[type="radio"],
+input[type="checkbox"]
+{
+    accent-color: var(--color-accent-light-2);
+}
+
+
+.expense-sorting-year-dropdown,
+.expense-sorting-month-dropdown
+{
+    margin-left: 17px;
+    margin-top: 1px;
+    margin-bottom: 8px;
+}
+
+.expense-sorting-year-for-month-dropdown
+{
+    margin-left: 17px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.expense-sorting-dropdown
+{
+    background-color: var(--color-aside);
+    border-color: var(--color-background);
+    border-style: solid;
+    border-width: 2px;
+    color: var(--color-text);
+
+    border-radius: 10px;
+
+    height: 25px;
+}
+
+.expense-sorting-date
+{
+    -webkit-appearance: none;
+    appearance: none;
+
+    background-color: var(--color-aside);
+    border-color: var(--color-background);
+    border-style: solid;
+    border-width: 2px;
+    color: var(--color-text);
+
+    border-radius: 5px;
+
+    height: 19px;
+    width: 98px;
+
+    margin-left: 17px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+
+    padding-left: 5px;
+}
+
+.sort-expenses-note
+{
+    background-color: var(--color-aside);
+    border-color: var(--color-background);
+    border-style: solid;
+    border-width: 2px;
+    color: var(--color-text);
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    border-radius: 5px;
+
+    height: 28px;
+
+    margin-bottom: 10px;
 }

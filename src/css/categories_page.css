@@ -427,12 +427,13 @@
     position: fixed;
 
     width: 425px;
-    height: 500px;
+    height: calc(100vh - 120px);
 
     right: 0;
     top: 100px;
 
     overflow: hidden;
+    overflow-y: auto;
 
     outline: none;
     outline-color: var(--color-accent-dark);

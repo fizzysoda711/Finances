@@ -32,7 +32,8 @@ pub fn run()
             archive_category,
             unarchive_category,
             delete_category,
-            add_expense
+            add_expense,
+            get_expense_years
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -261,7 +262,7 @@ fn get_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithB
     Ok(categories)
 }
 
-// get the categories with or without budgets from the database
+// get the archived categories with or without budgets from the database
 #[tauri::command]
 fn get_archived_categories_and_budgets(app: tauri::AppHandle) -> Result<Vec<CategoryWithBudget>, String>
 {
@@ -588,3 +589,37 @@ fn add_expense(app: tauri::AppHandle, expense: ExpensesStruct) -> Result<(), Str
     
     Ok(()) 
 }
+
+
+// get the years where there are expense entries
+#[tauri::command]
+fn get_expense_years(app: tauri::AppHandle) -> Result<Vec<i32>, String>
+{
+    // get database connection
+    let conn = get_connection(&app)?;
+
+    // count the number of archived categories
+    let mut statement= conn.prepare(
+        "SELECT DISTINCT exp_year
+         FROM EXPENDITURES
+         ORDER BY exp_year DESC"
+    )
+    .map_err(|error| error.to_string())?;
+
+    // read the years
+    let rows = statement.query_map([], |row| row.get::<_, i32>(0))
+        .map_err(|error| error.to_string())?;
+
+    // collect the years into a vector
+    let mut years = Vec::new();
+
+    for row in rows
+    {
+        let year = row.map_err(|error| error.to_string())?;
+        years.push(year);
+    }
+
+    Ok(years)
+}
+
+

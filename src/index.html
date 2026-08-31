@@ -16,7 +16,8 @@
             <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
           </svg>
       </button>
-
+      
+      <!-- categories page button -->
       <button class="categories-button sidebar-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2.5a1.5 1.5 0 0 1 1.2.6l.6.8a1.5 1.5 0 0 0 1.2.6z"/>
@@ -24,6 +25,7 @@
           </svg>
       </button>
 
+      <!-- savings page button -->
       <button class="savings-button sidebar-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/>
@@ -34,6 +36,7 @@
           </svg>
       </button>
 
+      <!-- expenses page button -->
       <button class="expenses-button sidebar-button sidebar-icon-button">
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/>
@@ -45,6 +48,7 @@
           </svg>
       </button>
       
+      <!-- bottom divider and settings page button -->
       <section class="sidebar-bottom">
         <div class="sidebar-line"></div>
 
@@ -71,25 +75,30 @@
         <h2>Dashboard</h2>
       </section>
 
-      <!-- budget bar icon and text + budget & spent information-->
-      <section class="budget-bar-all">
-        <div class="budget-bar-img">
-          <svg class="budget-svg" xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path pathLength="100" class="budget-icon-empty" d="M21 12a9 9 0 1 1-6.219-8.56"/>              
-            <path pathLength="100" class="budget-icon-full" d="M21 12a9 9 0 1 1-6.219-8.56"/>
-          </svg>
+      <!-- all dashboard content -->
+      <section class="all-dashboard">
 
-          <div class="budget-text">
-            <h1 class="budget-bar-amount">$0.00</h1>
-            <h3>Left in Budget</h3>
+        <!-- budget bar icon and text + budget & spent information -->
+        <section class="budget-bar-all">
+          <div class="budget-bar-img">
+            <svg class="budget-svg" xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path pathLength="100" class="budget-icon-empty" d="M21 12a9 9 0 1 1-6.219-8.56"/>              
+              <path pathLength="100" class="budget-icon-full" d="M21 12a9 9 0 1 1-6.219-8.56"/>
+            </svg>
+
+            <div class="budget-text">
+              <h1 class="budget-bar-amount">$0.00</h1>
+              <h3>Left in Budget</h3>
+            </div>
           </div>
-        </div>
 
-        <div class="budget-bar-info">
-          <h1 class="dash-date">January 2026 Analytics</h1>
-          <h2>Budget: <span class="dash-nums dash-budget">$1000.00</span></h2>
-          <h2>Spent: <span class="dash-nums dash-spent">$250.00</span></h2>
-        </div>
+          <div class="budget-bar-info">
+            <h1 class="dash-date">January 2026 Analytics</h1>
+            <h2>Budget: <span class="dash-nums dash-budget">$1000.00</span></h2>
+            <h2>Spent: <span class="dash-nums dash-spent">$250.00</span></h2>
+          </div>
+        </section>
+      
       </section>
     </section>
     
@@ -99,9 +108,10 @@
         <h2>Categories & Budgets</h2>
       </div>
 
+      <!-- categories list -->
       <div class="categories-section">
-        <!-- new category button -->
 
+        <!-- categories title and new category button -->
         <div class="categories-section-top-bar row vertical-center">
           <p class="categories-section-title">Categories</p>
           <button class="new-category-button full-center">
@@ -109,8 +119,10 @@
           </button>
         </div>
 
+        <!-- categories boxes section -->
         <div class="categories-boxes-section">
-          <!-- make a new category popup -->
+
+          <!-- category creation menu + error message -->
           <div class="hidden make-new-category-popup">
             <div class="new-category-inputs">
               <p class="make-new-category-name">Name: <input class="make-new-category-name-input" type="text" placeholder="Enter category name" maxLength="30"></p>
@@ -154,6 +166,7 @@
         </div>
       </div>
 
+      <!-- categories pie chart (generated dynamically) -->
       <div class="categories-page-charts horizontal-center">
         <div class="categories-page-pie-chart-wrapper horizontal-center">
           <canvas class="categories-page-pie-chart"></canvas>
@@ -174,13 +187,17 @@
         <h2>Expenses</h2>
       </div>
 
+      <!-- expenses list -->
       <div class="expenses-list-section">
         <div class="expenses-list-top-bar vertical-center">
-          <!-- expenses list section title -->
+
+          <!-- expenses section header title -->
           <p class="expenses-list-title vertical-center">Expenses</p>
 
+          <!-- expenses section header buttons -->
           <div class="expenses-list-top-bar-buttons row vertical-center">
-            <!-- to create new expense button -->
+
+            <!-- to create new expense -->
             <button class="new-expense-button full-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14"/>
@@ -197,8 +214,10 @@
           </div>
         </div>
 
-        <div class="expenses-list">
-          <!-- to create new expense inputs -->
+        <!-- expenses boxes section -->
+        <div class="expenses-list-whole">
+
+          <!-- new expense creation menu + error message -->
           <div class="new-expense-inputs vertical-center hidden">
 
             <p class="new-expense-input-label expense-input-categories-dropdown-label vertical-center">Category:
@@ -245,11 +264,14 @@
             </div>
           </div>
 
-          <!-- to sort expenses list -->
+          <!-- expenses sorting section -->
           <div class="expenses-sorting-section hidden">
+
+            <!-- expenses sorting section header + save and cancel buttons -->
             <div class="expenses-sorting-section-top-bar row vertical-center">
               <h3 class="expenses-sorting-title">Sorting</h3>
 
+              <!-- to save or cancel new expense sorting selections -->
               <div class="expense-sorting-application-buttons horizontal-center row">
                 <button class="save-new-expense-sorting-button">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -264,7 +286,10 @@
               </div>
             </div>
 
-            <div class="expenses-sorting-choices horizontal-center column">
+            <!-- expenses sorting dropdowns + selections -->
+            <div class="expenses-sorting-choices  column">
+
+              <!-- expenses sorting by date dropdown -->
               <button class="expenses-sorting-category date-exepenses-sorting row vertical center">
                 <h3>Date</h3>
                 <svg class="expenses-sorting-icon-closed date-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -274,10 +299,62 @@
                   <path d="m6 9 6 6 6-6"/>
                 </svg>
               </button>
-              <div class="expenses-sorting-selection-menu expenses-sorting-date-selection-menu hidden">
 
+              <!-- expenses sorting by date selections -->
+              <div class="expenses-sorting-selection-menu expenses-sorting-date-selection-menu column hidden">
+                <p class="expenses-sorting-section-header">Filter by Date</p>
+                  <!-- all time -->
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-filter-by-date" value="all-time-expenses">
+                    All-time
+                  </label>
+                  <!-- by specific year -->
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-filter-by-date" value="specific-year">
+                    By year
+                  </label>
+                    <div class="hidden sorting-selection-options sorting-selection-options-specific-year">
+                      <select class="expense-sorting-dropdown expense-sorting-year-dropdown">
+                        <option class="sorting-year-input" value="">Choose a year</option>
+                      </select>
+                    </div>
+                  <!-- by specific month -->
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-filter-by-date" value="specific-month">
+                    By month
+                  </label>
+                    <div class="hidden sorting-selection-options sorting-selection-options-specific-year-for-month">
+                      <select class="expense-sorting-dropdown expense-sorting-year-for-month-dropdown">
+                        <option class="sorting-year-for-month-input" value="">Choose a year</option>
+                      </select>
+                    </div>
+                    <div class="hidden sorting-selection-options sorting-selection-options-specific-month">
+                      <select class="expense-sorting-dropdown expense-sorting-month-dropdown">
+                        <option class="sorting-month-input" value="">Choose a month</option>
+                      </select>
+                    </div>
+                  <!-- by specific day -->
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-filter-by-date" value="specific-day">
+                    Specific date
+                  </label>
+                    <input class="hidden expense-sorting-date" type="date">
+            
+
+                <p class="expenses-sorting-section-header">Order by Date</p>
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-order-by" value="date-old-first checked">
+                    Newest first
+                  </label>
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-order-by" value="date-new-first">
+                    Oldest first
+                  </label>
+
+                <p class="expenses-sorting-info-subheader">*Note: Only one order option can be selected at once</p>
               </div>
 
+              <!-- expenses sorting by category dropdown -->
               <button class="expenses-sorting-category category-exepenses-sorting row vertical center">
                 <h3>Categories</h3>
                 <svg class="expenses-sorting-icon-closed category-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -287,10 +364,17 @@
                   <path d="m6 9 6 6 6-6"/>
                 </svg>
               </button>
-              <div class="expenses-sorting-selection-menu expenses-sorting-category-selection-menu hidden">
 
+              <!-- expenses sorting by category selections -->
+              <div class="expenses-sorting-selection-menu expenses-sorting-category-selection-menu column hidden">
+                <p class="expenses-sorting-section-header">Filter by Category</p>
+                  <select class="expense-sorting-dropdown expense-sorting-categories-dropdown horizontal-center">
+                    <option class="expense-sorting-categories-dropdown-options" value="">All Categories</option>
+                  </select>
+                  
               </div>
 
+              <!-- expenses sorting by expense amount dropdown -->
               <button class="expenses-sorting-category amount-exepenses-sorting row vertical center">
                 <h3>Amount</h3>
                 <svg class="expenses-sorting-icon-closed amount-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -300,10 +384,33 @@
                   <path d="m6 9 6 6 6-6"/>
                 </svg>
               </button>
-              <div class="expenses-sorting-selection-menu expenses-sorting-amount-selection-menu hidden">
 
+              <!-- expenses sorting by expense amount selections -->
+              <div class="expenses-sorting-selection-menu expenses-sorting-amount-selection-menu column hidden">
+                <p class="expenses-sorting-section-header">Filter by Amount</p>
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-filter-by-amount" value="all-amounts checked">
+                    Any amount
+                  </label>
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-filter-by-amount" value="specific-range">
+                    Custom range
+                  </label>
+
+                <p class="expenses-sorting-section-header">Order by Amount</p>
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-order-by" value="amount-greatest-first">
+                    Highest first
+                  </label>
+                  <label class="expenses-sorting-subheader">
+                    <input type="radio" name="expenses-sorting-order-by" value="amount-least-first">
+                    Lowest first
+                  </label>
+
+                  <p class="expenses-sorting-info-subheader">*Note: Only one order option can be selected at once</p>
               </div>
 
+              <!-- expenses sorting by note -->
               <button class="expenses-sorting-category note-exepenses-sorting row vertical center">
                 <h3>Note Search</h3>
                 <svg class="expenses-sorting-icon-closed note-expenses-sorting-icon-closed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -313,8 +420,18 @@
                   <path d="m6 9 6 6 6-6"/>
                 </svg>
               </button>
-              <div class="expenses-sorting-selection-menu expenses-sorting-date-selection-menu hidden">
 
+              <!-- expenses sorting by note selections -->
+              <div class="expenses-sorting-selection-menu expenses-sorting-note-selection-menu column hidden">
+                <p class="expenses-sorting-section-header">Search by Note</p>
+                  <textarea 
+                    class="sort-expenses-note" 
+                    placeholder="Search keywords separated by commas"
+                    maxlength="400"></textarea>
+                  <label class="expenses-sorting-subheader">
+                    <input type="checkbox" name="expenses-sorting-filter-by-note" value="no-note">
+                    Only expenses with no note
+                  </label>
               </div>
 
             </div>

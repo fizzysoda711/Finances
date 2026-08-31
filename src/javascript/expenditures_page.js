@@ -34,6 +34,41 @@ export async function getDropdownCategories()
     });
 }
 
+// to list archived and unarchived categories for sorting expenses
+export async function getSortingCategories()
+{
+    const dropdownCategories = document.querySelector(".expense-sorting-categories-dropdown");
+    dropdownCategories.innerHTML = `<option value="all-categories">All Categories</option>`;
+    
+    // for non archived categories
+    const categories = await invoke("get_categories_and_budgets");
+    
+    categories.forEach(function (category) {
+        // create a new option in the dropdown
+        const option = document.createElement("option");
+
+        // set the hidden value to reference later
+        option.value = category.c_id;
+        option.textContent = category.name;
+
+        dropdownCategories.appendChild(option);
+    });
+
+    // for archived categories
+    const archivedCategories = await invoke("get_archived_categories_and_budgets");
+    
+    archivedCategories.forEach(function (category) {
+        // create a new option in the dropdown
+        const archivedOption = document.createElement("option");
+
+        // set the hidden value to reference later
+        archivedOption.value = category.c_id;
+        archivedOption.textContent = category.name + " (archived)";
+
+        dropdownCategories.appendChild(archivedOption);
+    });
+}
+
 // close and reset new expenditure creation fields
 async function closeNewExpensePopup()
 {
@@ -53,13 +88,45 @@ async function closeNewExpensePopup()
     document.querySelector(".new-expense-button").classList.remove("hidden");
 }
 
-// add function to load expenses
-async function loadExpenses()
+export async function getDropdownYears()
 {
-    // make the sql string
-    sqlMessage = "";
+    // variables for the 2 dropdowns and the current year
+    const dropdownYears = document.querySelector(".expense-sorting-year-dropdown");
+    const dropdownYearsForMonths = document.querySelector(".expense-sorting-year-for-month-dropdown");
 
+    const currentYear = new Date().getFullYear();
 
+    // making the first selection in the dropdowns the current year
+    dropdownYears.innerHTML = `<option value="${currentYear}">${currentYear}</option>`;
+    dropdownYearsForMonths.innerHTML = `<option value="${currentYear}">${currentYear}</option>`;
+
+    // get the years
+    const years = await invoke("get_expense_years");
+    
+    years.forEach(function (year) {
+        // current year is already in both dropdowns
+        if (year === currentYear) {
+            return;
+        }
+
+        // create an option for the year dropdown
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        dropdownYears.appendChild(option);
+
+        // create a separate option for the month filter's year dropdown
+        const monthOption = document.createElement("option");
+        monthOption.value = year;
+        monthOption.textContent = year;
+        dropdownYearsForMonths.appendChild(monthOption);
+    });
+}
+
+// add function to load expenses
+export async function loadExpenses()
+{
+    getDropdownYears();
 }
 
     // how the expenses are loaded will depend on user selections
@@ -126,9 +193,9 @@ document.querySelector(".save-new-expense-button").addEventListener("click", asy
     else
     {
         let date = dateInput.split("-");
-        let yearInput = Number(date[0]);
-        let monthInput = Number(date[1]);
-        let dayInput = Number(date[2]);
+        yearInput = Number(date[0]);
+        monthInput = Number(date[1]);
+        dayInput = Number(date[2]);
     }
 
     // to send to rust function
@@ -145,7 +212,8 @@ document.querySelector(".save-new-expense-button").addEventListener("click", asy
     try
     {
         await invoke("add_expense", { expense: newExpense });
-        document.querySelector(".new-expense-error-message").classList.add("hidden"); 
+        document.querySelector(".new-expense-error-message").classList.add("hidden");
+        getDropdownYears();
     }
     catch (error)
     {
@@ -163,6 +231,7 @@ document.querySelector(".save-new-expense-button").addEventListener("click", asy
 document.querySelector(".sort-expenses-button").addEventListener("click", async function()
 {
     document.querySelector(".expenses-sorting-section").classList.toggle("hidden");
+    await getSortingCategories();
 });
 
 // opening and closing the sorting menu sections
@@ -193,4 +262,36 @@ document.querySelector(".note-exepenses-sorting").addEventListener("click", asyn
     document.querySelector(".note-expenses-sorting-icon-open").classList.toggle("hidden");
 
     document.querySelector(".expenses-sorting-note-selection-menu").classList.toggle("hidden");
+});
+
+// sorting menu date selection extra options hidding and unhiding
+const sortingByDateRadios = document.querySelectorAll(
+    'input[name="expenses-sorting-filter-by-date"]'
+);
+
+sortingByDateRadios.forEach(function(radio) {
+    radio.addEventListener("change", function() {
+        const yearDropdown = document.querySelector(".sorting-selection-options-specific-year");
+        const monthYearDropdown = document.querySelector(".sorting-selection-options-specific-year-for-month");
+        const monthDropdown = document.querySelector(".sorting-selection-options-specific-month");
+        const dateInput = document.querySelector(".expense-sorting-date");
+
+        // hide everything first
+        yearDropdown.classList.add("hidden");
+        monthYearDropdown.classList.add("hidden");
+        monthDropdown.classList.add("hidden");
+        dateInput.classList.add("hidden");
+
+        // show the controls for the selected option
+        if (radio.value === "specific-year") {
+            yearDropdown.classList.remove("hidden");
+        }
+        else if (radio.value === "specific-month") {
+            monthYearDropdown.classList.remove("hidden");
+            monthDropdown.classList.remove("hidden");
+        }
+        else if (radio.value === "specific-day") {
+            dateInput.classList.remove("hidden");
+        }
+    });
 });

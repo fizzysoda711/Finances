@@ -10,6 +10,8 @@ import { updateDash } from "./dashboard_page.js";
 
 import { loadCategories, loadArchivedCategories } from "./categories_page.js";
 
+import { loadExpenses } from "./expenditures_page.js";
+
 import "./expenditures_page.js";
 
 
@@ -35,6 +37,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     updateDash(); // update the dashboard in home
     loadArchivedCategories(); // load archived categories if any
     loadAllGraphics(); // load all graphics
+    loadExpenses(); // load expenses
 
 
     setInterval(updateDash, 60000); // update the dashboard every minute
